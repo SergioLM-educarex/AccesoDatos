@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Ejercicio12 {
 
 	private static final String TXT = ".txt";
-	private static final String NO = "n";
+	private static final String NO = "N";
 	private static final String SEPARADOR = ";";
 
 	public static void main(String[] args) {
@@ -21,14 +21,14 @@ public class Ejercicio12 {
 
 		Scanner scanner = new Scanner(System.in);
 		String nombreFichero = "";
-		boolean seguir = true;
+		boolean continuar = true;
 		String nombre, edad, ciudad, respuesta;
 
 		System.out.println("Introduce el nombre del fichero");
 		nombreFichero = scanner.nextLine().formatted(TXT);
 
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreFichero, true))) { // true = añade al final - NO SOBREESCRIBE
-			while (seguir) {
+			while (continuar) {
 				// Pedir los datos de la persona
 				System.out.println("Nombre: ");
 				nombre = scanner.nextLine();
@@ -48,7 +48,7 @@ public class Ejercicio12 {
 				System.out.print("¿Deseas añadir otra persona? (s/n): ");
 				respuesta = scanner.nextLine();
 				if (respuesta.equalsIgnoreCase(NO)) {
-					seguir = false;
+					continuar = false;
 				}
 			}
 
