@@ -22,9 +22,11 @@ public class Ejercicio14 {
 		try (BufferedReader lector = new BufferedReader(new FileReader(ruta))) {
 
 			/*
-			 * PARENTESIS // Razón: Los paréntesis fuerzan el orden de evaluación: // 1.
-			 * Primero: (linea = lector.readLine()) // 2. Después: comparar el resultado con
-			 * != null
+			 * PARENTESIS 
+			 * // Razón: Los paréntesis fuerzan el orden de evaluación: 
+			 *
+			 * Primero: (linea = lector.readLine()) //
+			 * Después: comparar el resultado con  != null
 			 */
 
 			while ((linea = lector.readLine()) != null) {
