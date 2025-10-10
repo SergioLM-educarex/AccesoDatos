@@ -1,4 +1,4 @@
-package tema1.ejercicio4.flujosostreams.ejercicios.streamCaracteres.ej16;
+package tema1.flujosostreams.ejercicios.streamCaracteres.ej16;
 
 import java.io.*;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ public class Ejercicio16 {
         Scanner entrada = new Scanner(System.in);
         String nombreFichero;
 
-        System.out.print("Indique cuál es el fichero: ");
+        System.out.print("Indique cuï¿½l es el fichero: ");
         nombreFichero = entrada.nextLine();
 
         File fichero = new File(nombreFichero);
@@ -20,11 +20,11 @@ public class Ejercicio16 {
 
             int numModificar = 0;
             do {
-                System.out.print("Introduce el número de línea que deseas borrar (1 - " + totalLineas + "): ");
+                System.out.print("Introduce el nï¿½mero de lï¿½nea que deseas borrar (1 - " + totalLineas + "): ");
                 try {
                     numModificar = Integer.parseInt(entrada.nextLine());
                 } catch (NumberFormatException e) {
-                    System.out.println("Por favor, introduce un número válido.");
+                    System.out.println("Por favor, introduce un nï¿½mero vï¿½lido.");
                 }
             } while (numModificar < 1 || numModificar > totalLineas);
 

@@ -1,4 +1,4 @@
-package tema1.ejercicio4.flujosostreams.ejercicios.almacenaObjetosenBinario.ej26;
+package tema1.flujosostreams.ejercicios.almacenaObjetosenBinario.ej26;
 
 import java.io.Serializable;
 
