@@ -1,5 +1,10 @@
 package tema1.ejercicio4.flujosostreams.ejercicios.almaObjetosenBinario.ej26;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 public class Ejercicio26 {
 
 	public static void main(String[] args) {
@@ -11,6 +16,44 @@ interface Serializable. Ahora, crea un programa que cree un empleado pasándole
 directamente los valores por parámetros, se guarde en el fichero empleado.bin Después
 crea otro programa que lea y muestre por pantalla el objeto del fichero empleado.bin
 		 */
+		
+		
+		Empleado empleado = new Empleado("12345678A", "Paco", 3000);
+		ObjectOutputStream oss=null;
+		
+		
+		
+		try {
+			oss = new ObjectOutputStream(new FileOutputStream("empleado.bin"));
+			oss.writeObject(empleado);
+			
+			
+			System.out.println("Empleado guardado correctamente");
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Errro al guardar el empleado: "+e.getMessage());
+			
+			
+		} catch (IOException e) {
+			
+			
+			e.printStackTrace();
+		}finally {
+			if (oss!=null) {
+				
+				try {
+					oss.close();
+				} catch (Exception e2) {
+					
+					System.out.println("Error al cerrar el ObjectOutputStream "+e2.getMessage());
+				}
+				
+			}
+		}
+		
+		
+		
 		
 	}
 }
