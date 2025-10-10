@@ -1,4 +1,4 @@
-package tema1.ejercicio4.flujosostreams.ejercicios.ej16;
+package tema1.ejercicio4.flujosostreams.ejercicios.streamCaracteres.ej16;
 
 import java.io.*;
 import java.util.Scanner;
