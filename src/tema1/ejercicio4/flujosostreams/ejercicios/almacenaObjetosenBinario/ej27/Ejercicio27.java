@@ -1,4 +1,4 @@
-package tema1.ejercicio4.flujosostreams.ejercicios.almaObjetosenBinario.ej27;
+package tema1.ejercicio4.flujosostreams.ejercicios.almacenaObjetosenBinario.ej27;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -51,7 +51,7 @@ public class Ejercicio27 {
 			break;
 
 		default:
-			System.out.println("Opción de valida");
+			System.out.println("Opciï¿½n de valida");
 			break;
 		}
 
