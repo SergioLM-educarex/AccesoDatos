@@ -1,4 +1,4 @@
-package flujosstream4.streamCaracteres41.ejercicios.ejercicio16;
+package tema1.ejercicio4.flujosostreams.ejercicios.ej16;
 
 import java.io.*;
 import java.util.Scanner;
@@ -28,7 +28,7 @@ public class Ejercicio16 {
                 }
             } while (numModificar < 1 || numModificar > totalLineas);
 
-            modificarFichero(fichero, numModificar);
+            borrarFichero(fichero, numModificar);
 
             System.out.println("\nFichero modificado:");
             mostrarFichero(fichero);
@@ -39,7 +39,7 @@ public class Ejercicio16 {
         entrada.close();
     }
 
-    private static void modificarFichero(File fichero, int numModificar) {
+    private static void borrarFichero(File fichero, int numModificar) {
         int lineaActual = 1;
         String linea;
         File temporal = new File("temporal.txt");

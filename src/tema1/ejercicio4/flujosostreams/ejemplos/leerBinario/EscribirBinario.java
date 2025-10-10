@@ -1,4 +1,4 @@
-package flujosstream4.streamCaracteres41.ejemplos.leerBinario;
+package tema1.ejercicio4.flujosostreams.ejemplos.leerBinario;
 
 
 import java.io.DataInputStream;
