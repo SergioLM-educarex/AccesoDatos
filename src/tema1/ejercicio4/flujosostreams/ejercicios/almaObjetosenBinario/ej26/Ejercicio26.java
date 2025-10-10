@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
+import tema1.ejercicio4.flujosostreams.ejercicios.almaObjetosenBinario.ej27.Empleado;
+
 public class Ejercicio26 {
 
 	public static void main(String[] args) {
@@ -32,7 +34,7 @@ crea otro programa que lea y muestre por pantalla el objeto del fichero empleado
 			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Errro al guardar el empleado: "+e.getMessage());
+			System.out.println("Error al guardar el empleado: "+e.getMessage());
 			
 			
 		} catch (IOException e) {
