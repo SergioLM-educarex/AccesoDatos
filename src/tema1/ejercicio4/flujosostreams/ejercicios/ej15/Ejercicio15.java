@@ -1,4 +1,4 @@
-package tema1.ejercicio4.flujosostreams.ej15;
+package tema1.ejercicio4.flujosostreams.ejercicios.ej15;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,4 +1,4 @@
-package tema1.ejercicio4.flujosostreams.ej11;
+package tema1.ejercicio4.flujosostreams.ejercicios.ej11;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
