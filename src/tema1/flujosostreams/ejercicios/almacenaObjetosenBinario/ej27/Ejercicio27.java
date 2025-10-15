@@ -1,5 +1,6 @@
 package tema1.flujosostreams.ejercicios.almacenaObjetosenBinario.ej27;
 
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,6 +12,9 @@ import java.util.Scanner;
 
 public class Ejercicio27 {
 
+	private static final String NUEVO_FICHERO_BIN = "nuevo_fichero.bin";
+	private static final String ARCHIVO = "empleado.bin";
+	private static final int SALIR = 5;
 	private static Scanner entrada = new Scanner(System.in);
 
 	public static void main(String[] args) {
@@ -22,7 +26,7 @@ public class Ejercicio27 {
 
 			operarMenu(opcion);
 
-		} while (opcion != 5);
+		} while (opcion != SALIR);
 
 	}
 
@@ -30,7 +34,7 @@ public class Ejercicio27 {
 
 		switch (opcion) {
 		case 1:
-			log_Empleados();
+			crear_Empleado();
 			break;
 
 		case 2:
@@ -38,11 +42,11 @@ public class Ejercicio27 {
 			break;
 
 		case 3:
-			// Lista empleados
+			listar_empleados();
 			break;
 
 		case 4:
-			// Borrar empleados (por el dni)
+			borrar_Empleado();
 			break;
 
 		case 5:
@@ -51,71 +55,169 @@ public class Ejercicio27 {
 			break;
 
 		default:
-			System.out.println("Opci�n de valida");
+			System.out.println("Opcion no valida");
 			break;
 		}
 
 	}
 
-	private static void buscar_Empleados() {
-		
-		String dniPedido;
-		
-		File archivo = new File("empleado.bin");
-		
-		Empleado empleado = null;
-		
-		ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo));
-		
-		System.out.println("Inserte el dni");
-		dniPedido = entrada.nextLine();
-		
-		while (ois.readObject()!=null) {
-			if (dniPedido.equals()) {
-				
+	private static void borrar_Empleado() {
+
+		ObjectInputStream inputStream = null;
+		ObjectOutputStream objectTemporal = null;
+		String dniAborrar;
+
+		File archivo = new File(ARCHIVO);
+		File temporal = new File(NUEVO_FICHERO_BIN);
+
+		System.out.println("Que DNI desea borrar");
+		dniAborrar = entrada.nextLine();
+
+		if (archivo.exists() && archivo.isFile()) {
+
+			try {
+				inputStream = new ObjectInputStream(new FileInputStream(archivo));
+				objectTemporal = new ObjectOutputStream(new FileOutputStream(temporal));
+
+				while (true) {
+
+					Empleado empleado = (Empleado) inputStream.readObject();
+
+					if (!dniAborrar.equals(empleado.getDni())) {
+						objectTemporal.writeObject(empleado);
+					}
+
+				}
+
+			} catch (EOFException eof) {
+
+			} catch (IOException | ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			
+			if (archivo.delete()) {
+				if (!temporal.renameTo(archivo)) {
+					System.out.println("Error al renombrar el fichero temporal.");
+				}
+			} else {
+				System.out.println("Error al eliminar el fichero original.");
+			}
+
 		}
-		
-		
-		
-		
-		
-		
-		
+
 	}
 
-	private static void log_Empleados() {
-		
-		Empleado empleado = pedirDatosEmpleados();
+	private static void listar_empleados() {
 
-		File archivo = new File("empleado.bin");
+		File archivo = new File(ARCHIVO);
+
+		ObjectInputStream ois;
+
+		if (archivo.exists() && archivo.isFile()) {
+
+			try {
+				ois = new ObjectInputStream(new FileInputStream(archivo));
+				while (true) { // Unico sitio donde lo vamos a ver
+
+					Empleado empleado = (Empleado) ois.readObject();
+
+					System.out.println(empleado.toString());
+				}
+
+			} catch (EOFException e) {
+				System.out.println("Terminado");
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+
+	}
+
+	private static void buscar_Empleados() {
+
+		String dniPedido;
+
+		File archivo = new File(ARCHIVO);
+
+		ObjectInputStream ois;
+
+		if (archivo.exists() && archivo.isFile()) {
+			try {
+				ois = new ObjectInputStream(new FileInputStream(archivo));
+
+				dniPedido = pedir_Dni();
+
+				while (true) { // Unico sitio donde lo vamos a ver
+
+					Empleado empleado = (Empleado) ois.readObject();
+
+					if (dniPedido.equals(empleado.getDni())) {
+						System.out.println(empleado.toString());
+
+					}
+
+				}
+
+			} catch (EOFException e) {
+				System.out.println("Terminado");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
+	}
+
+	private static String pedir_Dni() {
+		String dniPedido;
+		System.out.println("Inserte el dni");
+		dniPedido = entrada.nextLine();
+
+		return dniPedido;
+	}
+
+	private static void crear_Empleado() {
+		Empleado empleado = pedirDatosEmpleados();
+		File archivo = new File(ARCHIVO);
 		ObjectOutputStream oos = null;
 
 		try {
-			oos = new ObjectOutputStream(new FileOutputStream(archivo));
-			oos.writeObject(empleado);
-			
-			
-			
-			
+			// Si el archivo ya existe y tiene contenido, usamos MyObjectOutputStream para
+			// no escribir la cabecera de nuevo
+			if (archivo.exists() && archivo.length() > 0) {
+				oos = new MyObjectOutputStream(new FileOutputStream(archivo, true));
+			} else {
+				// Primera vez: usar ObjectOutputStream normal para escribir la cabecera
+				oos = new ObjectOutputStream(new FileOutputStream(archivo));
+			}
 
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			oos.writeObject(empleado);
+			System.out.println("Empleado creado correctamente.\n");
+
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			if (oos!=null) {
-				try {
+			System.out.println("Error al escribir el empleado: " + e.getMessage());
+		} finally {
+			try {
+				if (oos != null) {
 					oos.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 				}
+			} catch (IOException e) {
+				System.out.println("Error al cerrar el archivo: " + e.getMessage());
 			}
 		}
-
 	}
 
 	private static Empleado pedirDatosEmpleados() {
@@ -123,16 +225,17 @@ public class Ejercicio27 {
 		String nombre, dni;
 		double sueldo;
 
-		System.out.println("Inserte el nombre: ");
-		nombre = entrada.nextLine().toUpperCase().trim();
 
 		System.out.println("Inserte el dni: ");
 		dni = entrada.nextLine().toUpperCase().trim();
+		
+		System.out.println("Inserte el nombre: ");
+		nombre = entrada.nextLine().toUpperCase().trim();
 
 		System.out.println("Inserte el sueldo");
 		sueldo = Double.parseDouble(entrada.nextLine());
 
-		Empleado empleado = new Empleado(nombre, dni, sueldo);
+		Empleado empleado = new Empleado(dni, nombre, sueldo);
 
 		return empleado;
 
