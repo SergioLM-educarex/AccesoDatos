@@ -145,13 +145,13 @@ public class Ejercicio20_Main {
 		num_valido = false;
 
 		while (!num_valido) {
-			System.out.println("Escriba el número de teléfono (solo dígitos):");
+			System.out.println("Escriba el número de teléfono (solo digitos):");
 			try {
 
 				telefonoNumeros = Long.parseLong(entrada.nextLine());
-				num_valido = true; // Si no hay excepción, el número es válido
+				num_valido = true; // Si no hay excepcion, el número es valido
 			} catch (NumberFormatException e) {
-				System.err.println("Error: debe escribir solo números. Inténtelo de nuevo.");
+				System.err.println("Error: debe escribir solo numeros. Intentelo de nuevo.");
 			}
 
 		}
@@ -188,7 +188,7 @@ public class Ejercicio20_Main {
 
 		System.out.println("");
 		System.out.println("======== AGENDA DE TELEFONOS ========");
-		System.out.println("1. Añadir telefono");
+		System.out.println("1. A�adir telefono");
 		System.out.println("2. Mostrar lista de telefonos");
 		System.out.println("3. Modificar datos de la agenda");
 		System.out.println("4. Borrar un numero de telefono");
