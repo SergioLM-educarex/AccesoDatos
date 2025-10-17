@@ -22,7 +22,7 @@ public class Ejercicio32 {
 
 			// Leemos el producto con índice 1 (en realidad el segundo, porque el índice se
 			// multiplica por 36 más adelante)
-			leerProducto(accessFile, 0);
+			leerProducto(accessFile, 1);
 
 		} catch (FileNotFoundException e) {
 			// Si el archivo no existe o no se puede crear, se lanza esta excepción.

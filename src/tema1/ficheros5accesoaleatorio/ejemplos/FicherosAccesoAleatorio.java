@@ -19,7 +19,7 @@ public class FicherosAccesoAleatorio {
             archivo.writeBytes("Cuarta línea de ejemplo.\n");   // Línea 4
 
           
-            // Movemos el puntero de archivo al inicio para comenzar a leer desde el principio
+            // Movemos el puntero ARCHIVO.SEEK de archivo al inicio para comenzar a leer desde el principio
             archivo.seek(0);
 
             String linea;                    // Almacena temporalmente cada línea leída
