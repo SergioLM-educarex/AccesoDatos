@@ -58,7 +58,9 @@ public class Ejercicio33 {
 	private static void modificar_Stock(RandomAccessFile archivo) {
 		
 		int id_pedido= pedir_Codigo();
-		int codigo;
+		int codigo, stock;
+		boolean encontrado=false;
+		
 		try {
 			archivo.seek(0);
 			
@@ -67,19 +69,41 @@ public class Ejercicio33 {
 				codigo = archivo.readInt();
 				
 				if (codigo!=id_pedido) {
-					//Saltar 32
+					//Saltar 32 bytes por el orden que tiene el fichero ya que no existe
+					
+					archivo.skipBytes(32);
+					
+					
 				}else {
 					//Saltar 28
+					archivo.skipBytes(28);
+					
+					System.out.println("Stock actual: "+archivo.readInt());
+					
+					System.out.println("Inserte el nuevo stock: ");
+					stock = Integer.parseInt(entrada.nextLine());
+					
+					archivo.seek(archivo.getFilePointer()-4);
+					archivo.writeInt(stock);
+					System.out.println("Stock actualizado correctamente");
+					encontrado=true;
+					
 				}
+				
 			}
 			
 			
+			
+		} catch (EOFException e) {
+			// TODO: handle exception
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
+		if (!encontrado) {
+			System.out.println("Codigo no encontrado");
+		}
 		
 	}
 

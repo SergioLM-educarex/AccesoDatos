@@ -1,0 +1,28 @@
+
+<personas>
+    <persona>
+        <id doc="DNI">736000</id>
+        <nombre>Juan Pérez</nombre>
+        <edad>35</edad>
+    </persona>
+    <persona>
+        <id doc="NIE">823111</id>
+        <nombre>Laura Gómez</nombre>
+        <edad>28</edad>
+    </persona>
+    <persona>
+        <id doc="DNI">100234</id>
+        <nombre>Carlos Martínez</nombre>
+        <edad>41</edad>
+    </persona>
+    <persona>
+        <id doc="PASAPORTE">576810</id>
+        <nombre>Ana Ruiz</nombre>
+        <edad>23</edad>
+    </persona>
+    <persona>
+        <id doc="DNI">199999</id>
+        <nombre>Elena Morales</nombre>
+        <edad>33</edad>
+    </persona>
+</personas>
