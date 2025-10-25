@@ -21,7 +21,7 @@ import org.w3c.dom.Text;
 
 public class Ejercicio37 {
 
-	private static final int NO = 2;
+
 	private static final int SI = 1;
 	private static Scanner entrada = new Scanner(System.in);
 	private static Set<Alumno> conjuntoAlumnos = new TreeSet<Alumno>();
