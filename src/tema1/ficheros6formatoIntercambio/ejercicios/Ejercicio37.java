@@ -37,7 +37,7 @@ public class Ejercicio37 {
 		while (num == SI) {
 			System.out.println("----- PROGRAMA PARA AñADIR NOTAS EXPEDIENTE ----");
 			try {
-				// Pedimos número de expediente
+				// Pedimos numero de expediente
 				System.out.println("Inserte el numero de Expediente");
 				int numExpe = Integer.parseInt(entrada.nextLine());
 
@@ -73,12 +73,12 @@ public class Ejercicio37 {
 			e.printStackTrace();
 		}
 
-		// Creamos un DOM vacío
+		// Creamos un DOM vacio
 		Document documento = db.newDocument();
-		// Establecemos la versión XML
+		// Establecemos la version XML
 		documento.setXmlVersion("1.0");
 
-		// Creamos la raíz y añadimos al DOM
+		// Creamos la raiz y aniadimos al DOM
 		Element elementoRaiz = documento.createElement("Alumnos");
 
 		// ------------------------------
@@ -98,7 +98,7 @@ public class Ejercicio37 {
 
 			// ----------------
 			// Nombre
-			// Este paso es directo, añade desde el append child,
+			// Este paso es directo, aniade desde el append child,
 			// sin necesidad de crear un objeto Text
 			Element nombreAlumno = documento.createElement("Nombre");
 			nombreAlumno.appendChild(documento.createTextNode(alumno.getNombre()));
@@ -110,12 +110,12 @@ public class Ejercicio37 {
 			notaAlumno.appendChild(documento.createTextNode(String.valueOf(alumno.getNota())));
 			el_alumno.appendChild(notaAlumno);
 
-			// Añadir <Alumno> a la raíz
+			// Aniadir <Alumno> a la raiz
 			elementoRaiz.appendChild(el_alumno);
 		}
 
 		// ------------------------------
-		// 4. Añadir raíz al documento
+		// 4. Aniadir raiz al documento
 		// ------------------------------
 		documento.appendChild(elementoRaiz);
 
