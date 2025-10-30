@@ -53,7 +53,7 @@ public class Ejercicio20_Main {
 
 		default:
 
-			System.out.println("Opción no válida, repite la operación");
+			System.out.println("Opcion no valida, repite la operacion");
 			break;
 		}
 
