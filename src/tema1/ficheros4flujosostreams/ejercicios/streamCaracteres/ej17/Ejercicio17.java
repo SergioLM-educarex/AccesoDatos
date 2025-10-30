@@ -1,4 +1,4 @@
-package tema1.flujosostreams.ejercicios.streamCaracteres.ej17;
+package tema1.ficheros4flujosostreams.ejercicios.streamCaracteres.ej17;
 
 import java.io.*;
 import java.util.Scanner;

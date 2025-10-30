@@ -1,4 +1,4 @@
-package tema1.flujosostreams.ejercicios.streamBytes.ej24;
+package tema1.ficheros4flujosostreams.ejercicios.streamBytes.ej24;
 
 import java.io.DataInputStream;
 import java.io.EOFException;

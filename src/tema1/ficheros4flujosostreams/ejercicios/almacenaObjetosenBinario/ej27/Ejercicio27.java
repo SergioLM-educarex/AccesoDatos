@@ -1,4 +1,4 @@
-package tema1.flujosostreams.ejercicios.almacenaObjetosenBinario.ej27;
+package tema1.ficheros4flujosostreams.ejercicios.almacenaObjetosenBinario.ej27;
 
 import java.io.EOFException;
 import java.io.File;

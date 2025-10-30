@@ -1,4 +1,4 @@
-package tema1.ficheros6formatoIntercambio.dom.ejercicios;
+package tema1.ficheros6formatoIntercambio.dom.ejercicios.ejercicio37;
 
 import java.io.File;
 import java.util.Scanner;
