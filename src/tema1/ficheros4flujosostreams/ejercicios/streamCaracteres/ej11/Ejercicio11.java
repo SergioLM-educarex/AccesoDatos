@@ -1,4 +1,4 @@
-package tema1.flujosostreams.ejercicios.streamCaracteres.ej11;
+package tema1.ficheros4flujosostreams.ejercicios.streamCaracteres.ej11;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

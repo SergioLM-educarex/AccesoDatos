@@ -1,4 +1,4 @@
-package tema1.flujosostreams.ejercicios.streamCaracteres.ej14;
+package tema1.ficheros4flujosostreams.ejercicios.streamCaracteres.ej14;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

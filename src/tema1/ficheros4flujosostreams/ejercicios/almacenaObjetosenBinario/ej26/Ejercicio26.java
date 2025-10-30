@@ -1,11 +1,11 @@
-package tema1.flujosostreams.ejercicios.almacenaObjetosenBinario.ej26;
+package tema1.ficheros4flujosostreams.ejercicios.almacenaObjetosenBinario.ej26;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-import tema1.flujosostreams.ejercicios.almacenaObjetosenBinario.ej27.Empleado;
+import tema1.ficheros4flujosostreams.ejercicios.almacenaObjetosenBinario.ej27.Empleado;
 
 public class Ejercicio26 {
 

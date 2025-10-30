@@ -1,4 +1,4 @@
-package tema1.flujosostreams.ejercicios.streamBytes.ej23;
+package tema1.ficheros4flujosostreams.ejercicios.streamBytes.ej23;
 
 import java.io.DataOutputStream;
 import java.io.File;
