@@ -35,7 +35,7 @@ public class Ejercicio37 {
 		int num = 1;
 
 		while (num == SI) {
-			System.out.println("----- PROGRAMA PARA AñADIR NOTAS EXPEDIENTE ----");
+			System.out.println("----- PROGRAMA PARA A�ADIR NOTAS EXPEDIENTE ----");
 			try {
 				// Pedimos numero de expediente
 				System.out.println("Inserte el numero de Expediente");
@@ -53,7 +53,7 @@ public class Ejercicio37 {
 				System.out.println("¿Quieres continuar? 1-SI / 2-NO");
 				num = Integer.parseInt(entrada.nextLine());
 
-				// Crear objeto Alumno y añadir al TreeSet
+				// Crear objeto Alumno y anadir al TreeSet
 				Alumno alumno = new Alumno(numExpe, nombre, nota);
 				conjuntoAlumnos.add(alumno);
 
@@ -62,6 +62,7 @@ public class Ejercicio37 {
 			}
 		} // fin del while
 
+		
 		// ------------------------------
 		// 2. Crear estructura del DOM
 		// ------------------------------
@@ -86,10 +87,10 @@ public class Ejercicio37 {
 		// ------------------------------
 		for (Alumno alumno : conjuntoAlumnos) {
 
-			// Creo el elemento Alumno para añadirle toda la información
+			// Creo el elemento Alumno para anadirle toda la informacion
 			Element el_alumno = documento.createElement("Alumno");
 
-			// Creo el Nodo num_expediente con el fin de añadirle un nodo de tipo Texto
+			// Creo el Nodo num_expediente con el fin de anadirle un nodo de tipo Texto
 			// Este nodo tipo texto se hace desde el Document, no se crea otro Element
 			Element num_Expediente = documento.createElement("Expediente");
 			Text t_numexp = documento.createTextNode(String.valueOf(alumno.getNumExpediente()));
@@ -123,9 +124,9 @@ public class Ejercicio37 {
 		// 5. Transformar y guardar XML
 		// ------------------------------
 		try {
-			// 1. Crear una fuente/origen con el árbol DOM
+			// 1. Crear una fuente/origen con el arbol DOM
 			DOMSource fuente = new DOMSource(documento);
-			// 2. Crear el destino de la transformación (archivo)
+			// 2. Crear el destino de la transformacion (archivo)
 			StreamResult ficheroXML = new StreamResult(new File("notasALumnado.xml"));
 			// 2.1. Si queremos mostrar por consola
 			StreamResult consola = new StreamResult(System.out);
