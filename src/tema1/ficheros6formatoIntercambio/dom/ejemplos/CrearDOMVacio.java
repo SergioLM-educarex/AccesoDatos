@@ -1,4 +1,4 @@
-package tema1.ficheros6formatoIntercambio.ejemplos;
+package tema1.ficheros6formatoIntercambio.dom.ejemplos;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;

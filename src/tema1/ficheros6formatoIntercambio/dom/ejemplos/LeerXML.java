@@ -1,4 +1,4 @@
-package tema1.ficheros6formatoIntercambio.ejemplos;
+package tema1.ficheros6formatoIntercambio.dom.ejemplos;
 
 import java.io.File;
 import java.io.IOException;

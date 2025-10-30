@@ -1,4 +1,4 @@
-package tema1.ficheros6formatoIntercambio.ejercicios.t6_3JAXB;
+package tema1.ficheros6formatoIntercambio.jaxb.ejemplos;
 
 import java.io.File;
 

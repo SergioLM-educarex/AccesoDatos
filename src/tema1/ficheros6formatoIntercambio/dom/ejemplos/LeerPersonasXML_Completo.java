@@ -1,4 +1,4 @@
-package tema1.ficheros6formatoIntercambio.ejemplos;
+package tema1.ficheros6formatoIntercambio.dom.ejemplos;
 
 // Importación de clases necesarias para manejo de archivos y XML
 import java.io.File;

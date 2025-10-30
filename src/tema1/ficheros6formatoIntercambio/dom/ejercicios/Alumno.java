@@ -1,4 +1,4 @@
-package tema1.ficheros6formatoIntercambio.ejercicios;
+package tema1.ficheros6formatoIntercambio.dom.ejercicios;
 
 public class Alumno implements Comparable<Alumno> {
 
