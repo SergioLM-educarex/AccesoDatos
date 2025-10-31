@@ -88,6 +88,17 @@ public class Libreria {
 				+ listaLibros + "]";
 	}
 	
-	
+	public void mostrarDatosLibreria() {
+		
+		System.out.println("Libreria: "+nombre);
+		System.out.println("Poblacion: "+lugar);
+		System.out.println("Codigo postal: "+cod_Postal);
+		
+		//Printear la lista de libros
+		for (Libro libro : listaLibros) {
+			System.out.println(libro);
+		}
+		
+	}
 	
 }
