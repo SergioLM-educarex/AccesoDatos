@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<personas>
+    <listaPersonas>
+        <Persona>
+            <dni>123123</dni>
+            <nombre>Paco</nombre>
+            <edad>45</edad>
+        </Persona>
+        <Persona>
+            <dni>666666</dni>
+            <nombre>Luis</nombre>
+            <edad>33</edad>
+        </Persona>
+    </listaPersonas>
+</personas>

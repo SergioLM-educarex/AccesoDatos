@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Raiz>
+    <hoja nombre="valor">Texto del elemento - Tipo Texto</hoja>
+    <rama apellidos="Leon" nombre="sergio"/>
+</Raiz>

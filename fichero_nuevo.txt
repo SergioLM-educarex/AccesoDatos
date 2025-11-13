@@ -1,0 +1,50 @@
+Telefónica;4,32 €
+Banco Santander;4,56 €
+Banco Sabadell;1,95 €
+CaixaBank;5,51 €
+Iberdrola;13,56 €
+BBVA;9,74 €
+Dia;0,013 €
+International Airlines Group;2,47 €
+Repsol;11,68 €
+Inmobiliaria Colonial;6,35 €
+Sacyr;3,19 €
+Unicaja;1,17 €
+Bankinter;7,89 €
+Inditex;52,02 €
+Merlin Properties;11,45 €
+Enagás;13,53 €
+MAPFRE;2,39 €
+Ferrovial;37,96 €
+Redeia Corporacion SA;16,91 €
+Grupo ACS;41,56 €
+Fluidra;22,16 €
+Grifols;9,83 €
+Endesa;19,38 €
+Cellnex Telecom;35,78 €
+Puig;19,86 €
+Prosegur Cash SA;0,54 €
+Solaria Energía y Medio Ambiente;11,70 €
+Grupo FCC;13,82 €
+Naturgy;22,68 €
+Amadeus IT Group;65,12 €
+Gestamp Automocion;2,63 €
+Aena;197,60 €
+Corporacion Acciona Energias Renovables SA;20,38 €
+Atresmedia;4,70 €
+Línea Directa Aseguradora;1,09 €
+Indra Sistemas;16,40 €
+Ence Energía y Celulosa;2,93 €
+Tubacex;3,07 €
+Lar Espana Real Estate Socimi SA;8,12 €
+Faes Farma;3,71 €
+Meliá Hotels International;6,59 €
+Grifols;8,14 €
+CEMIG;1,91 €
+ArcelorMittal;21,48 €
+Gerdau;2,98 €
+Audax Renovables;1,80 €
+Almirall;8,39 €
+Viscofan;63,00 €
+Técnicas Reunidas;12,31 €
+Prosegur;1,85 €
