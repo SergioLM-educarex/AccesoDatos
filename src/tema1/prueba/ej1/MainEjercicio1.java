@@ -53,7 +53,7 @@ public class MainEjercicio1 {
 		System.out.println("Ejercicio 4");
 		System.out.println("Ejercicio 5");
 		System.out.println("Ejercicio 6");
-		System.out.println("\tElige opcion");
+		System.out.println("\tElige opciona");
 	}
 
 	private static void operarMenu(int opcion) throws FileNotFoundException, Exception {
