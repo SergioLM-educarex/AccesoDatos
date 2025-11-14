@@ -17,7 +17,7 @@ public class LeerJAXB {
 			JAXBContext contexto = JAXBContext.newInstance(Libreria.class);
 			// Crear un unmarshaller que convierte el XML en JavaBeans.
 			Unmarshaller um = contexto.createUnmarshaller();
-			// Realizar la deserialización llamando al método unmarshal del marshaller.
+			// Realiza la deserializaciï¿½n llamando al mï¿½todo unmarshal del marshaller.
 			Libreria laLibreria = (Libreria) um.unmarshal(new File("Libreria.xml"));
 			
 		laLibreria.mostrarDatosLibreria();
