@@ -1,0 +1,33 @@
+{
+  "personas" : [ {
+    "id" : 1,
+    "precio" : 20.0
+  }, {
+    "id" : 2,
+    "precio" : 30.0
+  }, {
+    "id" : 3,
+    "precio" : 45.0
+  }, {
+    "id" : 4,
+    "precio" : 50.0
+  }, {
+    "id" : 5,
+    "precio" : 35.0
+  }, {
+    "id" : 6,
+    "precio" : 60.0
+  }, {
+    "id" : 7,
+    "precio" : 120.0
+  }, {
+    "id" : 8,
+    "precio" : 15.0
+  }, {
+    "id" : 9,
+    "precio" : 26.0
+  }, {
+    "id" : 10,
+    "precio" : 90.0
+  } ]
+}
