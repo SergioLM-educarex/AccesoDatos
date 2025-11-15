@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<listaProductos>
+    <productos>
+        <nombre>Camisa de algodon</nombre>
+        <talla>M</talla>
+        <color>Azul</color>
+        <precio>20.0</precio>
+        <estado>Usado en buen estado</estado>
+    </productos>
+    <productos>
+        <nombre>Pantalones jeans</nombre>
+        <talla>L</talla>
+        <color>Negro</color>
+        <precio>30.0</precio>
+        <estado>Nuevo sin etiqueta</estado>
+    </productos>
+    <productos>
+        <nombre>Vestido</nombre>
+        <talla>S</talla>
+        <color>Rojo</color>
+        <precio>45.0</precio>
+        <estado>Nuevo con etiqueta</estado>
+    </productos>
+    <productos>
+        <nombre>Sudadera capucha</nombre>
+        <talla>L</talla>
+        <color>Gris</color>
+        <precio>50.0</precio>
+        <estado>Usado en buen estado</estado>
+    </productos>
+    <productos>
+        <nombre>Falda Larga</nombre>
+        <talla>M</talla>
+        <color>Verde</color>
+        <precio>35.0</precio>
+        <estado>Nuevo sin etiqueta</estado>
+    </productos>
+    <productos>
+        <nombre>Zapatillas deportivas</nombre>
+        <talla>42</talla>
+        <color>Blanco</color>
+        <precio>60.0</precio>
+        <estado>Usado con defectos</estado>
+    </productos>
+    <productos>
+        <nombre>Chaqueta de cuero</nombre>
+        <talla>M</talla>
+        <color>Negro</color>
+        <precio>120.0</precio>
+        <estado>Usado con defectos</estado>
+    </productos>
+    <productos>
+        <nombre>Camiseta basica</nombre>
+        <talla>XL</talla>
+        <color>Blanco</color>
+        <precio>15.0</precio>
+        <estado>Nuevo con etiqueta</estado>
+    </productos>
+    <productos>
+        <nombre>Pantalones cortos</nombre>
+        <talla>M</talla>
+        <color>Beige</color>
+        <precio>26.0</precio>
+        <estado>Usado en buen estado</estado>
+    </productos>
+    <productos>
+        <nombre>Botines de cuero</nombre>
+        <talla>39</talla>
+        <color>Marron</color>
+        <precio>90.0</precio>
+        <estado>Usado con defectos</estado>
+    </productos>
+</listaProductos>

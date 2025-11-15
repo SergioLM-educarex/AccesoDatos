@@ -53,7 +53,7 @@ public class MainEjercicio1 {
 		System.out.println("Ejercicio 4");
 		System.out.println("Ejercicio 5");
 		System.out.println("Ejercicio 6");
-		System.out.println("\tElige opciona");
+		System.out.println("\tElige opcion");
 	}
 
 	private static void operarMenu(int opcion) throws FileNotFoundException, Exception {
@@ -72,7 +72,7 @@ public class MainEjercicio1 {
 			break;
 
 		case 4:
-
+			ejercicio4();
 			break;
 		case 5:
 
@@ -87,6 +87,11 @@ public class MainEjercicio1 {
 			break;
 		}
 
+	}
+
+	private static void ejercicio4() {
+		
+		
 	}
 
 	private static void ejercicio3() throws FileNotFoundException, IOException {
