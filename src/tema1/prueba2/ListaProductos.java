@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @XmlRootElement
 public class ListaProductos implements Serializable {
 
-	@JsonProperty("personas")
+	@JsonProperty("productos")
 	ArrayList<Producto> productos = new ArrayList<Producto>();
 
 	public ListaProductos(ArrayList<Producto> productos) {

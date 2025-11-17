@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<dispositivos>
+    <dispositivo>
+        <marca>Apple</marca>
+        <modelo>iPhone 12</modelo>
+        <tipo>Smartphone</tipo>
+        <precioReacondicionado>799.0</precioReacondicionado>
+        <garantiaMeses>549</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>Samsung</marca>
+        <modelo>Galaxy S21</modelo>
+        <tipo>Smartphone</tipo>
+        <precioReacondicionado>849.0</precioReacondicionado>
+        <garantiaMeses>579</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>Lenovo</marca>
+        <modelo>ThinkPad L14</modelo>
+        <tipo>Portatil</tipo>
+        <precioReacondicionado>1099.0</precioReacondicionado>
+        <garantiaMeses>799</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>Apple</marca>
+        <modelo>MacBook Air M1</modelo>
+        <tipo>Portatil</tipo>
+        <precioReacondicionado>1129.0</precioReacondicionado>
+        <garantiaMeses>899</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>Xiaomi</marca>
+        <modelo>Redmi Note 11</modelo>
+        <tipo>Smartphone</tipo>
+        <precioReacondicionado>249.0</precioReacondicionado>
+        <garantiaMeses>159</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>Dell</marca>
+        <modelo>Inspiron 15</modelo>
+        <tipo>Portatil</tipo>
+        <precioReacondicionado>899.0</precioReacondicionado>
+        <garantiaMeses>629</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>HP</marca>
+        <modelo>Pavilion x360</modelo>
+        <tipo>Portatil</tipo>
+        <precioReacondicionado>799.0</precioReacondicionado>
+        <garantiaMeses>549</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>Samsung</marca>
+        <modelo>Galaxy Tab S7</modelo>
+        <tipo>Tablet</tipo>
+        <precioReacondicionado>699.0</precioReacondicionado>
+        <garantiaMeses>479</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>Apple</marca>
+        <modelo>iPad Air 4</modelo>
+        <tipo>Tablet</tipo>
+        <precioReacondicionado>649.0</precioReacondicionado>
+        <garantiaMeses>489</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>Amazon</marca>
+        <modelo>Kindle Paperwhite</modelo>
+        <tipo>Lector</tipo>
+        <precioReacondicionado>149.0</precioReacondicionado>
+        <garantiaMeses>99</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>Microsoft</marca>
+        <modelo>Surface Pro 7</modelo>
+        <tipo>Tablet</tipo>
+        <precioReacondicionado>999.0</precioReacondicionado>
+        <garantiaMeses>729</garantiaMeses>
+    </dispositivo>
+    <dispositivo>
+        <marca>Asus</marca>
+        <modelo>ROG Phone 5</modelo>
+        <tipo>Smartphone</tipo>
+        <precioReacondicionado>999.0</precioReacondicionado>
+        <garantiaMeses>699</garantiaMeses>
+    </dispositivo>
+</dispositivos>

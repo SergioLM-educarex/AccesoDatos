@@ -1,5 +1,5 @@
 {
-  "listaDispositivos" : [ {
+  "dispositivos" : [ {
     "id" : 101,
     "marca" : "Apple",
     "modelo" : "iPhone 12",

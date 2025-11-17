@@ -1,4 +1,4 @@
-package tema1.prueba;
+package tema1.prueba.ej1;
 
 import java.io.Serializable;
 import java.util.ArrayList;

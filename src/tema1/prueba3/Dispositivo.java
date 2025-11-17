@@ -1,7 +1,21 @@
 package tema1.prueba3;
 
-public class Dispositivo {
+import java.io.Serializable;
 
+
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
+@JsonIgnoreProperties(ignoreUnknown = true) //para ignorar lo que no queramos de json
+@XmlType(propOrder = { "marca", "modelo", "tipo", "precioReacondicionado", "garantiaMeses" }) //orden del xml
+//ignorar con xmlTrasient en el getter
+
+public class Dispositivo implements Serializable {
+
+	
 	private int id;
 	private String marca;
 	private String modelo;
@@ -12,7 +26,7 @@ public class Dispositivo {
 	private int stock;
 	private double precioReacondicionado;
 	private int garantiaMeses;
-
+	
 	public Dispositivo(int id, String marca, String modelo, String tipo, String almacenamiento, String ram,
 			String color, int stock, double precioReacondicionado, int garantiaMeses) {
 		super();
@@ -27,11 +41,11 @@ public class Dispositivo {
 		this.precioReacondicionado = precioReacondicionado;
 		this.garantiaMeses = garantiaMeses;
 	}
-
+	
 	public Dispositivo() {
 		super();
 	}
-
+	@XmlTransient
 	public int getId() {
 		return id;
 	}
@@ -63,7 +77,7 @@ public class Dispositivo {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-
+	@XmlTransient
 	public String getAlmacenamiento() {
 		return almacenamiento;
 	}
@@ -71,7 +85,7 @@ public class Dispositivo {
 	public void setAlmacenamiento(String almacenamiento) {
 		this.almacenamiento = almacenamiento;
 	}
-
+	@XmlTransient
 	public String getRam() {
 		return ram;
 	}
@@ -79,7 +93,7 @@ public class Dispositivo {
 	public void setRam(String ram) {
 		this.ram = ram;
 	}
-
+	@XmlTransient
 	public String getColor() {
 		return color;
 	}
@@ -87,7 +101,7 @@ public class Dispositivo {
 	public void setColor(String color) {
 		this.color = color;
 	}
-
+	@XmlTransient
 	public int getStock() {
 		return stock;
 	}

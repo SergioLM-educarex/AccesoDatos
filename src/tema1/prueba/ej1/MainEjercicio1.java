@@ -1,11 +1,15 @@
 package tema1.prueba.ej1;
 
+import java.io.BufferedWriter;
 import java.io.EOFException;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,9 +21,6 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.xml.bind.v2.runtime.reflect.ListTransducedAccessorImpl;
-
-import tema1.prueba.Persona;
-import tema1.prueba.Personas;
 
 public class MainEjercicio1 {
 
@@ -91,6 +92,27 @@ public class MainEjercicio1 {
 
 	private static void ejercicio4() {
 		
+		File fichero = new File("personas1.bin");
+		ArrayList<Persona> personas = new ArrayList<Persona>();
+		
+		
+		
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichero));
+			
+			personas = (ArrayList<Persona>) ois.readObject();
+			
+			
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException");
+			e.printStackTrace();
+		}
+		
 		
 	}
 
@@ -131,7 +153,6 @@ public class MainEjercicio1 {
 
 			//mapper.writeValue(System.out, personas);
 			
-			mostrarmenu();
 
 			File fichero = new File("personas1.bin");
 			ObjectOutputStream ois = new ObjectOutputStream(new FileOutputStream(fichero, false));
