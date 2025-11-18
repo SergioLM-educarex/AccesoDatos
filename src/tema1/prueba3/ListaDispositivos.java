@@ -17,7 +17,6 @@ public class ListaDispositivos implements Serializable {
 
 	@JsonProperty("dispositivos")
 	
-	
 	//Nombre del elemento
 	@XmlElement(name = "dispositivo")
 	private ArrayList<Dispositivo> listaDispositivos = new ArrayList<Dispositivo>();
