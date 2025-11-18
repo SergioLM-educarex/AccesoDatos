@@ -17,9 +17,6 @@ import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-
-
 public class MainDispositivos {
 
 	private static final File FILE_BINARIO_INVENTARIO = new File("inventario.dat");
@@ -47,30 +44,25 @@ public class MainDispositivos {
 
 	}
 
-	
-
 	private static void ejercicio5() {
-		
-		
+
 		try (RandomAccessFile raf = new RandomAccessFile(FILE_BINARIO_INVENTARIO, "rw")) {
 
-	        // Limpiamos el archivo por si ya existía
-	        raf.setLength(0);
+			// Limpiamos el archivo por si ya existía
+			raf.setLength(0);
 
-	        for (Dispositivo d : listaDispositivos.getListaDispositivos()) {
+			for (Dispositivo d : listaDispositivos.getListaDispositivos()) {
 
-	            raf.writeInt(d.getId());      // 4 bytes
-	            raf.writeInt(d.getStock());   // 4 bytes
-	        }
+				raf.writeInt(d.getId()); // 4 bytes
+				raf.writeInt(d.getStock()); // 4 bytes
+			}
 
-	        System.out.println("inventario.dat generado correctamente.");
+			System.out.println("inventario.dat generado correctamente.");
 
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-		
-	
 
 	private static void ejercicio4() {
 
@@ -79,18 +71,18 @@ public class MainDispositivos {
 		try {
 			ListaDispositivos lista = objectMapper.readValue(JSON_DISPOSITIVO, ListaDispositivos.class);
 			System.out.println("JSON leido correctamente");
-		
+
 			// Crear contexto JAXB
-						JAXBContext jaxbContext = JAXBContext.newInstance(ListaDispositivos.class);
-						Marshaller marshaller = jaxbContext.createMarshaller();
-						// Configuracion opcional para formato legible
-						marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-						// Convertir objeto a XML y mostrar en consola
-						
-						marshaller.marshal(lista,FILE_CATALOGO);
-						
-						System.out.println("Xml escrito correctamente");
-			
+			JAXBContext jaxbContext = JAXBContext.newInstance(ListaDispositivos.class);
+			Marshaller marshaller = jaxbContext.createMarshaller();
+			// Configuracion opcional para formato legible
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			// Convertir objeto a XML y mostrar en consola
+
+			marshaller.marshal(lista, FILE_CATALOGO);
+
+			System.out.println("Xml escrito correctamente");
+
 		} catch (StreamReadException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -265,8 +257,7 @@ public class MainDispositivos {
 		}
 
 	}
-	
-	
+
 	private static void operarMenu(int opcion) {
 
 		switch (opcion) {
@@ -295,7 +286,6 @@ public class MainDispositivos {
 		}
 
 	}
-	
 
 	private static void mostrarmenu() {
 
