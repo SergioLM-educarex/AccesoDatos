@@ -1,6 +1,6 @@
 package tema1.prueba.ej1;
 
-import java.io.BufferedWriter;
+
 import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,7 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,7 +20,7 @@ import javax.xml.bind.Unmarshaller;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.xml.bind.v2.runtime.reflect.ListTransducedAccessorImpl;
+
 
 public class MainEjercicio1 {
 
@@ -48,7 +48,7 @@ public class MainEjercicio1 {
 
 	private static void mostrarmenu() {
 
-		System.out.println("Ejercicio 1");
+		System.out.println("Ejercicio 1s");
 		System.out.println("Ejercicio 2");
 		System.out.println("Ejercicio 3");
 		System.out.println("Ejercicio 4");
@@ -76,7 +76,7 @@ public class MainEjercicio1 {
 			ejercicio4();
 			break;
 		case 5:
-
+			ejercicio5();
 			break;
 
 		case 6:
@@ -84,10 +84,16 @@ public class MainEjercicio1 {
 			break;
 
 		default:
-			System.out.println("opción no válida");
+			System.out.println("opcion no valida");
 			break;
 		}
 
+	}
+
+	private static void ejercicio5() {
+
+		
+		
 	}
 
 	private static void ejercicio4() {
