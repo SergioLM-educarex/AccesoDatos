@@ -47,7 +47,10 @@ public class Ejercicio4Menu {
 			break;
 
 		case 3:
-
+			mostrarModulos();
+			break;
+		case 4:
+			System.out.println("Saliendo....");
 			break;
 
 		default:
@@ -55,6 +58,28 @@ public class Ejercicio4Menu {
 			break;
 		}
 
+	}
+
+	private static void mostrarModulos() {
+		Statement sentencia;
+		try {
+			sentencia = con.createStatement();
+			ResultSet resultado = sentencia.executeQuery("select * from modulo");
+			System.out.println("Codigo \t \tNomvre");
+
+			while (resultado.next()) {
+				System.out
+						.println(resultado.getString(1) + "\t\t" + resultado.getString(2));
+			}
+			resultado.close();
+			sentencia.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 	}
 
 	private static void mostrarNotas() {
