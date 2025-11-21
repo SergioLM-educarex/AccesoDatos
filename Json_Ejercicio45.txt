@@ -1,1 +1,0 @@
-[{"dni":"22","nombre":"ser","edad":22},{"dni":"32","nombre":"aser","edad":20}]
