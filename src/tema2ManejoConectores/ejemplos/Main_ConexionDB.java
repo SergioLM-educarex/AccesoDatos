@@ -4,18 +4,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import tema2ManejoConectores.ejercicios.ejercicio9.Conexion9;
+
 public class Main_ConexionDB {
 
 	
 
 	public static void main(String[] args) {
-		// Llamar al método conectar para establecer la conexión
-		Connection conexion = Conexion.conectar();
-		// Cerrar la conexión después de usarla
+		// Llamar al mï¿½todo conectar para establecer la conexiï¿½n
+		Connection conexion = Conexion9.conectar();
+		// Cerrar la conexiï¿½n despuï¿½s de usarla
 		if (conexion != null) {
 			try {
 				conexion.close();
-				System.out.println("Conexión cerrada.");
+				System.out.println("Conexiï¿½n cerrada.");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
