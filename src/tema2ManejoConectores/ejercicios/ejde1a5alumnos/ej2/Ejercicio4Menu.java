@@ -65,7 +65,7 @@ public class Ejercicio4Menu {
 		try {
 			sentencia = con.createStatement();
 			ResultSet resultado = sentencia.executeQuery("select * from modulo");
-			System.out.println("Codigo \t \tNomvre");
+			System.out.println("Codigo \t \tNombre");
 
 			while (resultado.next()) {
 				System.out
