@@ -1,22 +1,23 @@
-package tema2ManejoConectores.ejercicios.ejercicio9;
+package tema2ManejoConectores.ejercicios10;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexion9 {
+public class ConexionNava {
 
-	private static final String URL = "jdbc:mysql://localhost:3306/bdalumnos";
+	
+	private static final String URL = "jdbc:mysql://localhost:3306/navavinted";
 	private static final String USER = "root"; // Usuario
 	private static final String PASSWORD = ""; // Contrasenia
-
+	
 	public static Connection conectar() {
 		Connection conexion = null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			// Establecer la conexion
 			conexion = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Conexion exitosa a la base de datos 'bdalumnos'");
+			System.out.println("Conexion exitosa a la base de datos 'navavinted'");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error: No se encontro el driver de MySQL.");
 			e.printStackTrace();
@@ -26,5 +27,4 @@ public class Conexion9 {
 		}
 		return conexion;
 	}
-
 }
