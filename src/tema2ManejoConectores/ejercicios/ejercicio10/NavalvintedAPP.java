@@ -1,10 +1,11 @@
-package tema2ManejoConectores.ejercicios10;
+package tema2ManejoConectores.ejercicios.ejercicio10;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
+import com.mysql.cj.exceptions.UnsupportedConnectionStringException;
 
 public class NavalvintedAPP {
 
@@ -50,27 +51,131 @@ public class NavalvintedAPP {
 			crearProducto();
 			break;
 		case 4:
-
+			calcularPrecioFinal();
 			break;
 		case 5:
-
+			//Se solicita un ID_Producto y la cantidad de productos.
+			// Restaremos el número de productos vendidos al stock
+			venderProducto();
 			break;
 		case 6:
-
+			System.out.println("Saliendo...");
 			break;
 
 		default:
+			System.out.println("Opcion no valida");
 			break;
 		}
 
 	}
 
+	private static void venderProducto() {
+		int idProducto=0; 
+		int cantidad=0;
+		
+		System.out.println("Inserte el ID del producto:");
+		    idProducto = Integer.parseInt(entrada.nextLine());
+		    
+		    System.out.println("Indique la cantidad");
+		    cantidad = Integer.parseInt(entrada.nextLine());
+
+		    String consulta = "SELECT nombre_Producto, stock FROM producto WHERE id_Producto = ?";
+		    String actualizar = "UPDATE producto SET stock = stock - "+cantidad+" WHERE id_Producto = ?";
+		    
+		    PreparedStatement ps;
+			try {
+				ps = con.prepareStatement(consulta);
+				 ps.setInt(1, idProducto);
+				 
+				 
+				 ResultSet rs = ps.executeQuery();
+
+			        if (!rs.next()) {
+			            System.out.println("No existe un producto con ese ID.");
+			            rs.close();
+			            ps.close();
+		
+			        }
+			        
+			        String nombre = rs.getString("nombre_Producto");
+			        int stock = rs.getInt("stock");
+
+			        System.out.println("Producto encontrado: " + nombre);
+			        System.out.println("Stock actual: " + stock);
+
+			        if (stock <= 0) {
+			            System.out.println("No hay stock disponible. No se puede vender.");
+			            rs.close();
+			            ps.close();
+			            return;
+			        }
+
+			        rs.close();
+			        ps.close();
+
+			        // Si todo ok → restamos stock
+			        PreparedStatement psUpdate = con.prepareStatement(actualizar);
+			        psUpdate.setInt(1, idProducto);
+
+			        int filas = psUpdate.executeUpdate();
+
+			        if (filas > 0) {
+			            System.out.println("Venta realizada con éxito. Stock actualizado correctamente.");
+			        }
+
+			        psUpdate.close();
+				 
+				 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	      
+	}
+
+	private static void calcularPrecioFinal() {
+	    int idProducto;
+	    double precio, precioFinal;
+	    int descuento;
+
+	    System.out.println("Inserte el ID del producto:");
+	    idProducto = Integer.parseInt(entrada.nextLine());
+
+	    String consulta = "SELECT precio, descuento FROM producto WHERE id_Producto = ?";
+
+	    try {
+	        PreparedStatement ps = con.prepareStatement(consulta);
+	        ps.setInt(1, idProducto);
+
+	        ResultSet rs = ps.executeQuery();
+
+	        if (rs.next()) {
+	            precio = rs.getDouble("precio");
+	            descuento = rs.getInt("descuento");
+
+	            precioFinal = precio - (precio * descuento / 100.0);
+
+	            System.out.println("Precio original: " + precio + "€");
+	            System.out.println("Descuento: " + descuento + "%");
+	            System.out.println("Precio final: " + precioFinal + "€");
+	        } else {
+	            System.out.println("No existe un producto con ese ID.");
+	        }
+
+	        rs.close();
+	        ps.close();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+
 	private static void crearProducto() {
 
 		String nombreProducto, estado;
-		int categoria = 0, talla = 0, id_color = 0, id_Material=0, stock=0, descuento=0;
+		int categoria = 0, talla = 0, id_color = 0, id_Material = 0, stock = 0, descuento = 0;
 		double precio, costo;
-		
 
 		System.out.println("Introduce el nombre del producto");
 		nombreProducto = entrada.nextLine();
@@ -82,26 +187,25 @@ public class NavalvintedAPP {
 		id_color = pedir_Color();
 
 		id_Material = pedir_Material();
-		
+
 		System.out.println("Inserte stock:");
-		stock= Integer.parseInt(entrada.nextLine());
-		
-		
+		stock = Integer.parseInt(entrada.nextLine());
+
 		System.out.println("Inserte el precio del producto");
-		precio= Double.parseDouble(entrada.nextLine());
-		
+		precio = Double.parseDouble(entrada.nextLine());
+
 		System.out.println("Costo del producto");
-		costo= Double.parseDouble(entrada.nextLine());
-	
+		costo = Double.parseDouble(entrada.nextLine());
+
 		System.out.println("Estado del producto:");
-		estado= entrada.nextLine();
-		
+		estado = entrada.nextLine();
+
 		System.out.println("Escribe el descuento que tiene");
 		descuento = Integer.parseInt(entrada.nextLine());
-		
+
 		String insercion = "INSERT INTO producto (nombre_Producto, id_categoria, id_Talla, id_Color,"
 				+ "id_Material, stock, precio, costo, estado, descuento)VALUES(?,?,?,?,?,?,?,?,?,?);";
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement(insercion);
 			ps.setString(1, nombreProducto);
@@ -114,26 +218,19 @@ public class NavalvintedAPP {
 			ps.setDouble(8, costo);
 			ps.setString(9, estado);
 			ps.setInt(10, descuento);
-			
-		
-			
+
 			// Ejecutamos la inserción
 			int filasInsertadas = ps.executeUpdate();
 			if (filasInsertadas > 0) {
-			System.out.println("Insertado "+
-					ps.getUpdateCount()+" registros");
+				System.out.println("Insertado " + ps.getUpdateCount() + " registros");
 			}
-			
-			
-			
-			
+
 			ps.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-	
+
 	}
 
 	private static int pedir_Material() {
@@ -145,14 +242,14 @@ public class NavalvintedAPP {
 			System.out.println("4. Lino");
 			System.out.println("5. Sintetico");
 			System.out.println("6. Cuero");
-		
+
 			id_Material = Integer.parseInt(entrada.nextLine());
 			if (id_Material < 1 || id_Material > 6) {
 				System.out.println("Opcion no válida, repita la operacion");
 			}
 
 		} while (id_Material < 1 || id_Material > 6);
-		
+
 		return id_Material;
 	}
 
@@ -173,7 +270,7 @@ public class NavalvintedAPP {
 			}
 
 		} while (id_color < 1 || id_color > 8);
-		
+
 		return id_color;
 	}
 

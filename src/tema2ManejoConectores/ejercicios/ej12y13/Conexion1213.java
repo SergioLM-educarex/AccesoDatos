@@ -1,13 +1,11 @@
-package tema2ManejoConectores.ejercicios10;
+package tema2ManejoConectores.ejercicios.ej12y13;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConexionNava {
-
-	
-	private static final String URL = "jdbc:mysql://localhost:3306/navavinted";
+public class Conexion1213 {
+	private static final String URL = "jdbc:mysql://localhost:3306/bdrecetas";
 	private static final String USER = "root"; // Usuario
 	private static final String PASSWORD = ""; // Contrasenia
 	
