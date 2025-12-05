@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion1213 {
-	private static final String URL = "jdbc:mysql://localhost:3306/bdrecetas";
+	private static final String URL = "jdbc:mysql://localhost:3306/bdrecetas=allowMultiQueries=true";
 	private static final String USER = "root"; // Usuario
 	private static final String PASSWORD = ""; // Contrasenia
 	
@@ -15,7 +15,7 @@ public class Conexion1213 {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			// Establecer la conexion
 			conexion = DriverManager.getConnection(URL, USER, PASSWORD);
-			System.out.println("Conexion exitosa a la base de datos 'navavinted'");
+			System.out.println("Conexion exitosa a la base de datos 'recetas'");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Error: No se encontro el driver de MySQL.");
 			e.printStackTrace();
