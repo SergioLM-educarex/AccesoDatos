@@ -1,0 +1,1 @@
+SELECT * FROM receta JOIN origen ON origen_id = id WHERE pais = España;

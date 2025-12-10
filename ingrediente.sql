@@ -1,5 +1,4 @@
--- Insertar ingredientes
-INSERT INTO Ingrediente (receta_id, nombre, cantidad)
+INSERT INTO ingrediente (receta_id, nombre, cantidad)
 VALUES (1, 'Tomate', '1 kg'),
 (1, 'Aceite', '100 ml'),
 (1, 'Pimiento verde', '100 g'),
