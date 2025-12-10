@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion1213 {
-	private static final String URL = "jdbc:mysql://localhost:3306/bdrecetas=allowMultiQueries=true";
+	private static final String URL = "jdbc:mysql://localhost:3306/bdrecetas?allowMultiQueries=true";
 	private static final String USER = "root"; // Usuario
 	private static final String PASSWORD = ""; // Contrasenia
 	
