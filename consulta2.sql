@@ -1,1 +1,2 @@
-SELECT * FROM receta JOIN origen ON origen_id = id WHERE pais = España;
+SELECT * FROM receta r JOIN origen o ON o.id = r.origen_id where o.pais = 'España';
+

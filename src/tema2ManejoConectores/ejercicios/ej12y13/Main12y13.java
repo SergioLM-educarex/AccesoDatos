@@ -80,9 +80,14 @@ public class Main12y13 {
 
 	private static void recetas_Espania(String scripT) {
 		
-		//esto esta mal
+		
 		ResultSet rs;
 		Statement stmt;
+		
+		
+		// String sql = "SELECT * FROM receta r JOIN origen o ON o.id = r.origen_id where o.pais = 'España';";
+		
+		
 		try {
 			stmt = con.createStatement();
 			BufferedReader br = new BufferedReader(new FileReader(scripT));
@@ -99,10 +104,10 @@ public class Main12y13 {
 			rs = stmt.executeQuery(script);
 
 			while (rs.next()) {
-				System.out.println(rs.getInt(1));
-				System.out.println(rs.getString(2));
-				System.out.println(rs.getString(3));
-				System.out.println(rs.getInt(4));
+				System.out.println(rs.getInt("id"));
+				System.out.println(rs.getString("nombre"));
+				System.out.println(rs.getString("tipo"));
+				System.out.println(rs.getString("pais"));
 				System.out.println("------");
 			}
 
