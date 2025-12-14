@@ -1,0 +1,1 @@
+DELETE FROM receta where nombre = 'Vichyssoise';

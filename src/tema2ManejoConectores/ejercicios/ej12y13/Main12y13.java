@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +20,14 @@ public class Main12y13 {
 	private static final String SCRIPT_RECETA = "receta.sql";
 	private static final String SCRIPT1 = "consulta1.sql";
 	private static final String SCRIPT2 = "consulta2.sql";
+	private static final String SCRIPT3 = "consulta3.sql";
+	private static final String SCRIPT4 = "consulta4.sql";
+	private static final String SCRIPT5 = "consulta5.sql";
+	private static final String SCRIPT6 = "consulta6.sql";
+	private static final String SCRIPT7 = "consulta7.sql";
+	private static final String SCRIPT8 = "consulta8.sql";
+	private static final String SCRIPT9 = "consulta9.sql";
+	private static final String SCRIPT10 = "consulta10.sql";
 
 	private static Connection con = Conexion1213.conectar();
 
@@ -25,9 +36,9 @@ public class Main12y13 {
 		int opcion = 0;
 		Scanner entrada = new Scanner(System.in);
 
-	//	insertarDatos(SCRIPT_ORIGEN);
-	//	insertarDatos(SCRIPT_RECETA);
-	//	insertarDatos(SCRIPT_INGREDIENTE);
+		// insertarDatos(SCRIPT_ORIGEN);
+		// insertarDatos(SCRIPT_RECETA);
+		// insertarDatos(SCRIPT_INGREDIENTE);
 
 		do {
 			mostrarMenu();
@@ -47,23 +58,23 @@ public class Main12y13 {
 			recetas_Espania(SCRIPT2);
 			break;
 		case 3:
-
+			recetas_Tomate();
 			break;
 
 		case 4:
-
+			contar_Tipos_Recetas();
 			break;
 		case 5:
-
+			recetas_Por_Nombre();
 			break;
 		case 6:
-
+			recetas_Con_Sopa();
 			break;
 		case 7:
-
+			actualizar_Region_SopaAve();
 			break;
 		case 8:
-
+			borrar_Vichyssoise();
 			break;
 		case 9:
 
@@ -73,21 +84,169 @@ public class Main12y13 {
 			break;
 
 		default:
+			System.out.println("Opcion no válida");
 			break;
 		}
 
 	}
 
+	private static void borrar_Vichyssoise() {
+		
+		try (Statement stmt = con.createStatement()) {
+			boolean resultado = false;
+			String script = null;
+			
+				script = Files.readString(Paths.get(SCRIPT8));
+				System.out.println(script);
+				
+			resultado = stmt.execute(script);
+				
+			if (resultado) {
+				System.out.println("Registro borrado");
+			}else {
+				System.out.println("Registro no borrado");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private static void actualizar_Region_SopaAve() {
+		try (Statement stmt = con.createStatement()) {
+			int resultado = 0;
+			String script = null;
+			
+				script = Files.readString(Paths.get(SCRIPT7));
+				System.out.println(script);
+				
+			resultado = stmt.executeUpdate(script);
+				
+			if (resultado==1) {
+				System.out.println("Región no actualizada correctamente");
+			}else {
+				System.out.println("Región actualizada");
+			}
+				
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		
+		
+		
+	}
+
+	private static void recetas_Con_Sopa() {
+		try (Statement stmt = con.createStatement()) {
+
+			String script = Files.readString(Paths.get(SCRIPT6));
+			System.out.println(script);
+
+			ResultSet rs = stmt.executeQuery(script);
+			
+			
+			while (rs.next()) {
+				System.out.println(rs.getString("nombre"));
+				
+			}
+			System.out.println("------------------------");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	private static void recetas_Por_Nombre() {
+		try (Statement stmt = con.createStatement()) {
+
+			String script = Files.readString(Paths.get(SCRIPT5));
+			System.out.println(script);
+
+			ResultSet rs = stmt.executeQuery(script);
+			
+			
+			while (rs.next()) {
+				System.out.println(rs.getString("nombre"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private static void contar_Tipos_Recetas() {
+
+		try (Statement stmt = con.createStatement()) {
+
+			String script = Files.readString(Paths.get(SCRIPT4));
+			System.out.println(script);
+
+			ResultSet rs = stmt.executeQuery(script);
+			
+			
+			while (rs.next()) {
+				System.out.print(rs.getString(1)+" ="); 
+				System.out.println(rs.getInt(2));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private static void recetas_Tomate() {
+
+		try (Statement stmt = con.createStatement()) {
+
+			String script = Files.readString(Paths.get(SCRIPT3));
+			System.out.println(script);
+
+			ResultSet rs = stmt.executeQuery(script);
+
+			while (rs.next()) {
+				System.out.println("Recetas con Tomate -> " + "Nombre: " + rs.getString("receta_nombre")
+						+ " | Origen id: " + rs.getInt("origen_id") + " | Tipo: " + rs.getString("tipo"));
+				System.out.println("------------------");
+			}
+
+		} catch (IOException | SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	private static void recetas_Espania(String scripT) {
-		
-		
+
 		ResultSet rs;
 		Statement stmt;
-		
-		
-		// String sql = "SELECT * FROM receta r JOIN origen o ON o.id = r.origen_id where o.pais = 'España';";
-		
-		
+
+		// String sql = "SELECT * FROM receta r JOIN origen o ON o.id = r.origen_id
+		// where o.pais = 'España';";
+
 		try {
 			stmt = con.createStatement();
 			BufferedReader br = new BufferedReader(new FileReader(scripT));
@@ -123,7 +282,7 @@ public class Main12y13 {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private static void listar_Recetas(String archivo) {

@@ -1,0 +1,3 @@
+SELECT *
+    FROM RECETA
+    ORDER BY nombre;
