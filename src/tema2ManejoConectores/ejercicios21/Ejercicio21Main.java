@@ -60,7 +60,7 @@ public class Ejercicio21Main {
             case 3:
                 // Opción 3: Contar alumnos
                 int totalAlumnos = contarAlumnos();
-                System.out.println("Número total de alumnos: " + totalAlumnos);
+                System.out.println("Número total de alumnoss: " + totalAlumnos);
                 break;
 
             case 4:
