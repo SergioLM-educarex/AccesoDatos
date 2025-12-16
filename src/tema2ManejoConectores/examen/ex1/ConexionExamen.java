@@ -1,4 +1,4 @@
-package tema2ManejoConectores.examen;
+package tema2ManejoConectores.examen.ex1;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

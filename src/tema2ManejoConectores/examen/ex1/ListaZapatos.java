@@ -1,12 +1,15 @@
 // ListaZapatos.java
-package tema2ManejoConectores.examen;
+package tema2ManejoConectores.examen.ex1;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+@XmlRootElement
 public class ListaZapatos implements Serializable {
 	
 	@JsonProperty("zapatos")

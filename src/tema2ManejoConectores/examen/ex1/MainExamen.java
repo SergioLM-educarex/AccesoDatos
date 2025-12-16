@@ -1,5 +1,5 @@
 // MainExamen.java
-package tema2ManejoConectores.examen;
+package tema2ManejoConectores.examen.ex1;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -296,12 +296,13 @@ public class MainExamen {
 		ObjectMapper objectMapper = new ObjectMapper();
 
 		try {
-			// Usa File para leer el archivo correctamente
+			// Usar File para leer el archivo correctamente
 			lista = objectMapper.readValue(new File(ZAPATOS_JSON), ListaZapatos.class);
 			System.out.println("JSON zapatos leído correctamente");
 
 			// Mostrar los zapatos leídos
 			lista.obtener_Lista_Zapatos();
+			System.out.println("");
 
 		} catch (IOException e) {
 			System.err.println("Error al leer el archivo JSON: " + e.getMessage());
