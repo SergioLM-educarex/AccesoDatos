@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aves>
+    <ave>
+        <nombre_comun>Quebrantahuesos</nombre_comun>
+        <nombre_cientifico>Gypaetus barbatus</nombre_cientifico>
+        <habitat>Pirineos</habitat>
+        <envergadura_cm>275</envergadura_cm>
+        <estado_conservacion>En peligro</estado_conservacion>
+    </ave>
+    <ave>
+        <nombre_comun>Halcón peregrino</nombre_comun>
+        <nombre_cientifico>Falco peregrinus</nombre_cientifico>
+        <habitat>Acantilados</habitat>
+        <envergadura_cm>120</envergadura_cm>
+        <estado_conservacion>Preocupación menor</estado_conservacion>
+    </ave>
+    <ave>
+        <nombre_comun>Alimoche común</nombre_comun>
+        <nombre_cientifico>Neophron percnopterus</nombre_cientifico>
+        <habitat>Zonas abiertas</habitat>
+        <envergadura_cm>170</envergadura_cm>
+        <estado_conservacion>En peligro</estado_conservacion>
+    </ave>
+</aves>

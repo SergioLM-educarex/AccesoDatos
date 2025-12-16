@@ -1,0 +1,32 @@
+{
+  "aves": [
+    {
+      "nombre_comun": "Águila imperial ibérica",
+      "nombre_cientifico": "Aquila adalberti",
+      "habitat": "Dehesas",
+      "envergadura_cm": 220,
+      "estado_conservacion": "En peligro"
+    },
+    {
+      "nombre_comun": "Buitre leonado",
+      "nombre_cientifico": "Gyps fulvus",
+      "habitat": "Zonas montañosas",
+      "envergadura_cm": 265,
+      "estado_conservacion": "Preocupación menor"
+    },
+    {
+      "nombre_comun": "Cigüeña blanca",
+      "nombre_cientifico": "Ciconia ciconia",
+      "habitat": "Humedales",
+      "envergadura_cm": 215,
+      "estado_conservacion": "Preocupación menor"
+    },
+    {
+      "nombre_comun": "Urogallo cantábrico",
+      "nombre_cientifico": "Tetrao urogallus cantabricus",
+      "habitat": "Bosques atlánticos",
+      "envergadura_cm": 90,
+      "estado_conservacion": "En peligro crítico"
+    }
+  ]
+}
