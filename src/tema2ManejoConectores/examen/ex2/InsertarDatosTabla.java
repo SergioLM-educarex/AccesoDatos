@@ -1,14 +1,14 @@
 package tema2ManejoConectores.examen.ex2;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Scanner;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -16,9 +16,12 @@ import javax.xml.bind.Unmarshaller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class InsertarTabla {
+public class InsertarDatosTabla {
 
+	private static final String SEPARADOR = ",";
 	// Rutas de los archivos
+
+	private static final File AVES_TXT = new File("aves.txt");
 	private static final String AVES_JSON = "aves.json";
 	private static final File AVES_XML = new File("aves.xml");
 
@@ -31,11 +34,16 @@ public class InsertarTabla {
 	public static Lista_Aves listaAves = new Lista_Aves(); // lista final SIN duplicados
 
 	public static void main(String[] args) {
-
+		System.out.println("DATOS JSON");
 		leerDatosJson();
+
+		System.out.println("DATOS XML");
 		leer_Datos_Xml();
 
 		unirListas(); // aquí se eliminan duplicados
+
+		System.out.println("Datos TXT");
+		leer_Datos_Txt();
 		System.out.println("---------");
 
 		listaAves.mostrar_Aves();
@@ -44,9 +52,43 @@ public class InsertarTabla {
 
 	}
 
-	private static void mostrar_Total_Aves() {
+	private static void leer_Datos_Txt() {
 
-		String sql = "SELECT * FROM ";
+		String linea, nombre, cientifico, habitat, estado;
+		int envergadura = 0;
+
+		String[] datosTroc;
+
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(AVES_TXT));
+
+			br.readLine(); // Leer cabecera
+			while ((linea = br.readLine()) != null) {
+
+				datosTroc = linea.split(SEPARADOR);
+				nombre = datosTroc[0];
+				cientifico = datosTroc[1];
+				habitat = datosTroc[2];
+				envergadura = Integer.parseInt(datosTroc[3]);
+				estado = datosTroc[4];
+
+				Ave ave = new Ave(nombre, cientifico, habitat, envergadura, estado);
+
+				if (!existeAveEnListaFinal(ave)) {
+
+					listaAves.aniadir_Ave(ave);
+				}
+
+			}
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -105,16 +147,22 @@ public class InsertarTabla {
 	}
 
 	/**
-	 * Comprueba si un ave ya existe en la lista final
+	 * Comprueba si un ave ya existe en la lista final Normaliza los nombres
+	 * científicos para evitar duplicados por mayúsculas, minúsculas o espacios.
 	 */
 	private static boolean existeAveEnListaFinal(Ave aveNueva) {
+		// Normalizamos el nombre científico del ave nueva
+		String nuevoNombre = aveNueva.getNombre_cientifico().trim().toLowerCase();
 
 		for (Ave a : listaAves.getAves()) {
-			if (a.getNombre_cientifico().equalsIgnoreCase(aveNueva.getNombre_cientifico())) {
-				return true;
+			// Normalizamos el nombre científico del ave existente
+			String nombreExistente = a.getNombre_cientifico().trim().toLowerCase();
+			if (nombreExistente.equals(nuevoNombre)) {
+				System.out.println("Ave " + nuevoNombre + "ya existe en la lista");
+				return true; // ya existe en la lista
 			}
 		}
-		return false;
+		return false; // no existe, se puede añadir
 	}
 
 	/**

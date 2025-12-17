@@ -1,0 +1,1 @@
+Select * from ave where envergadura_cm >= ?

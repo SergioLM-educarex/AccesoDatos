@@ -1,0 +1,10 @@
+nombre_comun,nombre_cientifico,habitat,envergadura_cm,estado_conservacion
+Halcón peregrino,Falco peregrinus,Zonas abiertas,120,Preocupación menor
+Chochín,Troglodytes troglodytes,Bosques y jardines,10,Preocupación menor
+Oropéndola europea,Oriolus oriolus,Bosques y cultivos,42,Preocupación menor
+Gavilán común,Accipiter nisus,Bosques y zonas abiertas,75,Preocupación menor
+Golondrina común,Hirundo rustica,Zonas urbanas y rurales,35,Preocupación menor
+Escribano soteño,Emberiza cirlus,Praderas y matorrales,18,Preocupación menor
+Milano real,Milvus milvus,Zonas agrícolas,180,Vulnerable
+Lavandera boyera,Motacilla flava,Humedales y riberas,20,Preocupación menor
+Piquituerto común,Loxia curvirostra,Bosques de coníferas,25,Preocupación menor

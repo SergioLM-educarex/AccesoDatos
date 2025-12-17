@@ -152,7 +152,7 @@ public class MainExamen {
 
 	private static void mostrar_Zapatos_Rojos() {
 		// Consulta preparada
-		String sql = "SELECT * FROM zapato where color = ? and stock <=?;";
+		String sql = "SELECT * FROM zapato where color =? and stock <=?;";
 		PreparedStatement pstmt;
 		try {
 			pstmt = conn.prepareStatement(sql);
