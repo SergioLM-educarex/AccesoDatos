@@ -20,7 +20,6 @@ public class Lista_Aves implements Serializable {
     }
 
     @XmlElement(name="ave")   // JAXB usará esto para mapear cada <ave>
-   
     public ArrayList<Ave> getAves() {
         return aves;
     }

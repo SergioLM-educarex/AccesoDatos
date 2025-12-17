@@ -137,7 +137,7 @@ public class MainExamen {
 			
 			stmt.registerOutParameter(1, java.sql.Types.INTEGER);
 			
-			stmt.execute();
+			stmt.executeUpdate();
 			
 			int cantidad = stmt.getInt(1);
 			
@@ -263,6 +263,7 @@ public class MainExamen {
 
 	private static void insertarDatos() {
 		int contador = 0;
+		int filas=0;
 
 		try {
 			String sql = "INSERT INTO zapato (marca, modelo, tamano, color, stock, precio)"
@@ -276,14 +277,14 @@ public class MainExamen {
 				ps.setString(4, z.getColor());
 				ps.setInt(5, z.getStock());
 				ps.setDouble(6, z.getPrecio());
-				int filas = ps.executeUpdate();
+				filas = ps.executeUpdate();
 
 				if (filas > 0) {
 					contador++;
 				}
 
 			}
-			System.out.println("Insertadas " + contador + " filas");
+			System.out.println("Insertadas " + filas + " filas");
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

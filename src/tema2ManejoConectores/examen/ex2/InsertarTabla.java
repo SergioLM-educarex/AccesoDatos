@@ -16,14 +16,11 @@ import javax.xml.bind.Unmarshaller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class MainEx2 {
+public class InsertarTabla {
 
-	private static final int OPCION_SALIR = 7;
 	// Rutas de los archivos
 	private static final String AVES_JSON = "aves.json";
 	private static final File AVES_XML = new File("aves.xml");
-	public static final String TABLA_AVE = "Tabla_Ave.sql";
-	public static Scanner entrada = new Scanner(System.in);
 
 	// Conexión a BD
 	private static Connection conn = ConexionAve.conectar();
@@ -35,9 +32,6 @@ public class MainEx2 {
 
 	public static void main(String[] args) {
 
-		int opcion = 0;
-
-		crear_Tabla_Ave();
 		leerDatosJson();
 		leer_Datos_Xml();
 
@@ -48,59 +42,11 @@ public class MainEx2 {
 
 		insertar_Base_Datos();
 
-		do {
-			mostrar_Menu();
-			opcion = Integer.parseInt(entrada.nextLine());
-			operar_Menu(opcion);
-		} while (opcion != OPCION_SALIR);
-
 	}
 
-	private static void operar_Menu(int opcion) {
+	private static void mostrar_Total_Aves() {
 
-		switch (opcion) {
-		case 1:
-
-			break;
-		case 2:
-
-			break;
-
-		case 3:
-
-			break;
-
-		case 4:
-
-			break;
-
-		case 5:
-
-			break;
-
-		case 6:
-			
-			break;
-
-		case 7:
-			System.out.println("Saliendo....");
-			break;
-
-		default:
-			System.out.println("Opcion no válida");
-			break;
-		}
-
-	}
-
-	private static void mostrar_Menu() {
-		System.out.println("-------------");
-		System.out.println("====== Menu operaciones ======");
-		System.out.println("1.Mostrar todas las aves\r\n" + "\r\n" + "2.Mostrar aves por hábitat\r\n" + "\r\n"
-				+ "3.Mostrar aves con una envergadura mayor a un valor indicado\r\n" + "\r\n"
-				+ "4.Mostrar el ave con mayor envergadura\r\n" + "\r\n"
-				+ "5.Mostrar la envergadura media por estado de conservación\r\n" + "\r\n" + "6.Exportar datos\r\n"
-				+ "\r\n" + "7.Salir");
+		String sql = "SELECT * FROM ";
 	}
 
 	/**
@@ -208,21 +154,4 @@ public class MainEx2 {
 		}
 	}
 
-	/**
-	 * Crea la tabla leyendo el script SQL desde fichero
-	 */
-	private static void crear_Tabla_Ave() {
-
-		try {
-			String sql = Files.readString(Paths.get(TABLA_AVE));
-
-			Statement st = conn.createStatement();
-			st.execute(sql);
-
-			System.out.println("Tabla creada o ya existente");
-
-		} catch (IOException | SQLException e) {
-			e.printStackTrace();
-		}
-	}
 }
