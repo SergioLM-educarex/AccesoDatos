@@ -1,4 +1,4 @@
-package tema3PostgreSQL.ejercicios.ej9;
+package tema3PostgreSQL.ejercicios.ej9_10;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
