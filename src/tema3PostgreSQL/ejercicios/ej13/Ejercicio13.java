@@ -59,7 +59,7 @@ public class Ejercicio13 {
 			break;
 
 		default:
-			System.out.println("Opción no válida, repita la operacion");
+			System.out.println("Opción no válida, repita la operacions");
 			break;
 		}
 		
