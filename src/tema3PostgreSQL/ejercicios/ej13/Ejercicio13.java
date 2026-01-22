@@ -131,6 +131,7 @@ public class Ejercicio13 {
                     modificar_campo_propietario("direccion", dni);
                     break;
                 case 4:
+                	mostrar_Menu();
                     break;
                 default:
                     System.out.println("Opción no válida");

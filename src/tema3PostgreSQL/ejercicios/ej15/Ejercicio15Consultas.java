@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 import tema3PostgreSQL.ConexionMascotasDB;
 
-public class Ejercicio15Rutinas {
+public class Ejercicio15Consultas {
 
 	private static final int CASE_3_MOSTRAR_PERROS_MOQUILLO = 3;
 	private static final int CASE_2_MOSTRAR_NOMBRE_MASCOTAS_DNI = 2;
