@@ -2,10 +2,10 @@ package tema3PostgreSQL.ejercicios.ej16;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import tema3PostgreSQL.ConexionMascotasDB;
@@ -48,42 +48,41 @@ public class Ejercicio16FuncionesRutinas {
 	}
 
 	private static void poner_Vacuna() {
-		String consulta = "{call poner_Vacuna(?,?,?,?)}";
+	    String consulta = "CALL poner_Vacuna(?, ?, ?, ?)";  // ← SIN LLAVES
 
-		System.out.println("Inserte el id de la mascota: ");
-		int id = Integer.parseInt(entrada.nextLine());
+	    System.out.println("Inserte el id de la mascota: ");
+	    int id = Integer.parseInt(entrada.nextLine());
 
-		System.out.println("Inserte nombre vacuna ");
-		String nombreVacuna = entrada.nextLine();
+	    System.out.println("Inserte nombre vacuna ");
+	    String nombreVacuna = entrada.nextLine();
 
-		System.out.println("Inserte el numero de colegiado");
-		int colegiado = Integer.parseInt(entrada.nextLine());
+	    System.out.println("Inserte el numero de colegiado");
+	    int colegiado = Integer.parseInt(entrada.nextLine());
 
-		// Fecha de vacunacion
-		System.out.println("Indique año vacunacion: ");
-		int anyoInt = Integer.parseInt(entrada.nextLine());
-		System.out.println("Indique mes de vacunacion: ");
-		int mesInt = Integer.parseInt(entrada.nextLine());
-		System.out.println("Indique dia: ");
-		int diaInt = Integer.parseInt(entrada.nextLine());
+	    // Fecha de vacunacion
+	    System.out.println("Indique año vacunacion: ");
+	    int anyoInt = Integer.parseInt(entrada.nextLine());
+	    System.out.println("Indique mes de vacunacion: ");
+	    int mesInt = Integer.parseInt(entrada.nextLine());
+	    System.out.println("Indique dia: ");
+	    int diaInt = Integer.parseInt(entrada.nextLine());
 
-		LocalDate fecha = LocalDate.of(anyoInt, mesInt, diaInt);
+	    LocalDate fecha = LocalDate.of(anyoInt, mesInt, diaInt);
 
-		try (CallableStatement cs = conn.prepareCall(consulta)) {
-			
-			cs.setInt(1, id);           // primer ?
-			cs.setString(2, nombreVacuna);    // segundo ?
-			cs.setInt(3, colegiado);    // tercer ?
-			cs.setDate(4,java.sql.Date.valueOf(fecha));
-			
-			cs.execute();
-			
-			System.out.println("PINCHOTAZOOOOOO");
+	    try (PreparedStatement ps = conn.prepareStatement(consulta)) {
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	        ps.setInt(1, id);
+	        ps.setString(2, nombreVacuna);
+	        ps.setInt(3, colegiado);
+	        ps.setDate(4, java.sql.Date.valueOf(fecha));
 
+	        ps.execute();
+
+	        System.out.println("PINCHOTAZOOOOOO");
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 	private static void contar_mascotas() {
