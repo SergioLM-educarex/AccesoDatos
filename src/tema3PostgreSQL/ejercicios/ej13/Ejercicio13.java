@@ -32,7 +32,7 @@ public class Ejercicio13 {
 		int opcion;
 
 		do {
-			mostrar_Menu();
+			mostrar_Menu_Principal();
 			opcion = Integer.parseInt(entrada.nextLine());
 			operarMenu(opcion);
 		} while (opcion != OPCION_SALIR);
@@ -56,7 +56,7 @@ public class Ejercicio13 {
 			do {
 				ver_Menu_Modificar();
 				opcionModificar = Integer.parseInt(entrada.nextLine());
-				operar_alta(opcionModificar);
+				operar_Modificar(opcionModificar);
 			} while (opcionModificar < 1 || opcionModificar > 3);
 			break;
 
@@ -77,6 +77,8 @@ public class Ejercicio13 {
 			break;
 		}
 	}
+
+	
 
 	
 
@@ -122,6 +124,13 @@ public class Ejercicio13 {
 	}
 
 	/* ===================== ALTA ===================== */
+	
+	private static void menu_alta() {
+		System.out.println("Seleccione un alta");
+		System.out.println("1. Alta de Veterinario");
+		System.out.println("2. Alta de Mascota");
+		System.out.println("3. Alta de Propietario");
+	}
 
 	private static void operar_alta(int opcion) throws SQLException {
 
@@ -136,14 +145,19 @@ public class Ejercicio13 {
 			break;
 
 		case MENU_ALTA_PROPIETARIO:
-			System.out.println("Alta Propietario (pendiente de BD)");
+			dar_Alta_Propietario();
+			
 			break;
 
 		default:
 			System.out.println("Opción no disponible");
 			break;
 		}
+		
+		
 	}
+
+	// ====== ALTA DE MASCOTA =======================
 
 	private static void dar_Alta_Mascota() throws SQLException {
 		String sqlVacuna = "INSERT INTO public.mascota(id, nombre, especie, raza, cartillavacunacion) "
@@ -247,19 +261,148 @@ public class Ejercicio13 {
 
 	}
 
+	
+	/* ========= ALTA VETERINARIO ==============*/
 	private static void dar_Alta_Veterinario() {
+		String sql = "INSERT INTO veterinario (dni, nombre, apellidos, numcolegiado) VALUES (?, ?, ?, ?)";
 
+		int numColegiado, dni;
+		String nombre, apellido1 = null,apellido2 = null;
+		String[] apellidos = new String[2];
+	
+
+		System.out.println("INSERTE UN VETERINARIO");
+
+		System.out.println("Ingrese numero de colegiado");
+		numColegiado = Integer.parseInt(entrada.nextLine());
+
+		System.out.println("Ingrese un nombre");
+		nombre = entrada.nextLine();
+
+		System.out.println("Ingrese el primer apellido");
+		apellidos[0] = entrada.nextLine();
+		
+		System.out.println("Ingrese el segundo apellido");
+		apellidos[1] = entrada.nextLine();
+
+		System.out.println("Ingrese el dni");
+		dni = Integer.parseInt(entrada.nextLine());
+		
+
+		try {
+			PreparedStatement st = conn.prepareStatement(sql);
+
+			// Asignar parámetros --Cambiar
+			st.setInt(1, dni);
+			st.setString(2, nombre);
+			st.setArray(3, conn.createArrayOf("text", apellidos));
+			st.setInt(4, numColegiado);
+
+			// Ejecutar INSERT
+			int filasInsertadas = st.executeUpdate();
+
+			if (filasInsertadas > 0) {
+				System.out.println("Veterinario insertado correctamente");
+			}
+
+			st.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/* ======== ALTA PROPIETARIO ==== */
+	
+	private static void dar_Alta_Propietario() {
+		String sql = "INSERT INTO propietario (dni, nombre, apellidos, direccion)\r\n"
+        		+ "VALUES (?, ?, ?, ROW(?, ?, ?, ?))";
+
+        int dni, numero, cp;
+        String nombre, calle, ciudad;
+        String[] apellidos = new String[2];
+
+        System.out.println("INSERTE UN PROPIETARIO");
+
+        System.out.print("Ingrese DNI: ");
+        dni = Integer.parseInt(entrada.nextLine());
+
+        System.out.print("Ingrese nombre: ");
+        nombre = entrada.nextLine();
+
+        System.out.print("Ingrese primer apellido: ");
+        apellidos[0] = entrada.nextLine();
+
+        System.out.print("Ingrese segundo apellido: ");
+        apellidos[1] = entrada.nextLine();
+
+        System.out.print("Ingrese calle: ");
+        calle = entrada.nextLine();
+
+        System.out.print("Ingrese número: ");
+        numero = Integer.parseInt(entrada.nextLine());
+
+        System.out.print("Ingrese ciudad: ");
+        ciudad = entrada.nextLine();
+
+        System.out.print("Ingrese código postal: ");
+        cp = Integer.parseInt(entrada.nextLine());
+
+        try (PreparedStatement st = conn.prepareStatement(sql)) {
+
+            st.setInt(1, dni);
+            st.setString(2, nombre);
+            st.setArray(3, conn.createArrayOf("text", apellidos));
+            st.setString(4, calle);
+            st.setInt(5, numero);
+            st.setString(6, ciudad);
+            st.setInt(7, cp);
+
+            int filasInsertadas = st.executeUpdate();
+
+            if (filasInsertadas > 0) {
+                System.out.println("Propietario insertado correctamente");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
 	}
 
-	private static void menu_alta() {
-		System.out.println("Seleccione un alta");
-		System.out.println("1. Alta de Veterinario");
-		System.out.println("2. Alta de Mascota");
-		System.out.println("3. Alta de Propietario");
-	}
+	
 	
 	/* ====== ======== ======= MODIFICAR ========== ============ =============*/
 	
+	private static void operar_Modificar(int opcionModificar) {
+		switch (opcionModificar) {
+		case 1:
+			modificar_propietario();
+			break;
+			
+		case 2:
+			modificar_Campo_mascota();
+			break;
+			
+		case 3:
+			mostrar_Menu_Principal();
+			break;
+
+		default:
+			System.out.println("Opcion no válida");
+			break;
+		}
+		
+	}
+	
+	
+	private static void modificar_Campo_mascota() {
+	
+		
+		
+	}
+
 	private static void ver_Menu_Modificar() {
 		System.out.println("¿Que quieres modificar?");
 		System.out.println("1. Modificar Propietario");
@@ -267,6 +410,8 @@ public class Ejercicio13 {
 		System.out.println("3. Salir");
 		
 	}
+	
+	
 	
 
 	/* ===================== MODIFICAR PROPIETARIO ===================== */
@@ -310,7 +455,7 @@ public class Ejercicio13 {
 					modificar_campo_propietario("direccion", dni);
 					break;
 				case 4:
-					mostrar_Menu();
+					mostrar_Menu_Principal();
 					break;
 				default:
 					System.out.println("Opción no válida");
@@ -322,6 +467,9 @@ public class Ejercicio13 {
 			e.printStackTrace();
 		}
 	}
+	
+	/* ===================== MODIFICAR MASCOTA ===================== */
+	
 
 	private static void modificar_campo_propietario(String campo, int dni) {
 
@@ -348,7 +496,7 @@ public class Ejercicio13 {
 
 	/* ===================== MENÚ ===================== */
 
-	private static void mostrar_Menu() {
+	private static void mostrar_Menu_Principal() {
 		System.out.println("-----------------------------------");
 		System.out.println("------  APLICACION MASCOTAS   -----");
 		System.out.println("-----------------------------------");
