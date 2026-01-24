@@ -12,6 +12,10 @@ import tema3PostgreSQL.ConexionMascotasDB;
 
 public class Ejercicio13 {
 
+	
+	/* ================== CONSTANTES MENU BORRAR =============== */
+	private static final int CASE_BORRAR_MASCOTA = 1;
+	private static final int CASE_BORRAR_PROPIETARIO = 2;
 	/* ================== CONSTANTES MENU ALTA =============== */
 	private static final int MENU_ALTA_VETERINARIO = 1;
 	private static final int MENU_ALTA_MASCOTA = 2;
@@ -74,7 +78,12 @@ public class Ejercicio13 {
 			break;
 
 		case CASE_BAJA:
-			// implementar
+			int opcionBorrar = 0;
+			do {
+				ver_Menu_Borrar();
+				opcionBorrar = Integer.parseInt(entrada.nextLine());
+				operar_Borrar(opcionBorrar);
+			} while (opcionBorrar < 1 || opcionBorrar > 2);
 			break;
 
 		case CASE_APLICAR_VACUNA:
@@ -89,6 +98,91 @@ public class Ejercicio13 {
 			System.out.println("Opción no válida");
 			break;
 		}
+	}
+
+	/* ========================= BORRAR ======================= */
+
+	private static void ver_Menu_Borrar() {
+
+		System.out.println("¿Que quieres borrar?");
+		System.out.println("1. Mascota");
+		System.out.println("2. Propietario");
+		System.out.println("Ingrese una opcion");
+
+	}
+
+	private static void operar_Borrar(int opcionBorrar) {
+
+		switch (opcionBorrar) {
+		case CASE_BORRAR_MASCOTA:
+			borrar_Mascota();
+			break;
+
+		case CASE_BORRAR_PROPIETARIO:
+			borrar_Propietario();
+			break;
+		default:
+			System.out.println("Opción no válida");
+			break;
+		}
+
+	}
+	/* ========================= BORRAR MAscota ======================= */
+	private static void borrar_Mascota() {
+		String sql = "DELETE FROM mascota" + " WHERE nombre= ?";
+
+		String nombre;
+
+		System.out.println("Inserte el nombre de la mascota a borrar");
+		nombre = entrada.nextLine();
+
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, nombre);
+
+			int resultado = ps.executeUpdate();
+			
+			if (resultado>0) {
+				System.out.println("Mascota: "+nombre+" borrada correctamente");
+			}else {
+				System.out.println("La mascota no existe");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	/* =================== BORRAR PROPIETARIO ==================== */
+	private static void borrar_Propietario() {
+		String sql = "DELETE FROM propietario" + " WHERE dni= ?";
+
+		int dni;
+
+		System.out.println("Inserte el dni del propietario a borrar");
+		dni = Integer.parseInt(entrada.nextLine());
+
+		try {
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, dni);
+
+			int resultado = ps.executeUpdate();
+			
+			if (resultado>0) {
+				System.out.println("DNI borrado correctamente");
+			}else {
+				System.out.println("El propietario no existe");
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	/* ===================== ALTA ===================== */

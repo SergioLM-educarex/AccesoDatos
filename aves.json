@@ -1,32 +1,160 @@
-{
-  "aves": [
-    {
-      "nombre_comun": "Águila imperial ibérica",
-      "nombre_cientifico": "Aquila adalberti",
-      "habitat": "Dehesas",
-      "envergadura_cm": 220,
-      "estado_conservacion": "En peligro"
-    },
-    {
-      "nombre_comun": "Buitre leonado",
-      "nombre_cientifico": "Gyps fulvus",
-      "habitat": "Zonas montañosas",
-      "envergadura_cm": 265,
-      "estado_conservacion": "Preocupación menor"
-    },
-    {
-      "nombre_comun": "Cigüeña blanca",
-      "nombre_cientifico": "Ciconia ciconia",
-      "habitat": "Humedales",
-      "envergadura_cm": 215,
-      "estado_conservacion": "Preocupación menor"
-    },
-    {
-      "nombre_comun": "Urogallo cantábrico",
-      "nombre_cientifico": "Tetrao urogallus cantabricus",
-      "habitat": "Bosques atlánticos",
-      "envergadura_cm": 90,
-      "estado_conservacion": "En peligro crítico"
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Pokédex - Primera Generación</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
     }
-  ]
-}
+
+    h1 {
+      text-align: center;
+    }
+
+    #pokedex {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 96px;
+      height: 96px;
+      transition: transform 0.3s ease;
+    }
+
+    .card img:hover {
+      transform: scale(1.1);
+    }
+
+    .number {
+      font-weight: bold;
+      color: #666;
+    }
+
+    .types {
+      margin-top: 8px;
+    }
+
+    .type {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      color: white;
+      margin: 2px;
+    }
+
+    /* Colores por tipo */
+    .grass { background-color: #78C850; }
+    .poison { background-color: #A040A0; }
+    .fire { background-color: #F08030; }
+    .water { background-color: #6890F0; }
+    .bug { background-color: #A8B820; }
+    .normal { background-color: #A8A878; }
+    .electric { background-color: #F8D030; color: black; }
+    .ground { background-color: #E0C068; color: black; }
+    .fairy { background-color: #EE99AC; }
+    .fighting { background-color: #C03028; }
+    .psychic { background-color: #F85888; }
+    .rock { background-color: #B8A038; }
+    .ghost { background-color: #705898; }
+    .ice { background-color: #98D8D8; color: black; }
+    .dragon { background-color: #7038F8; }
+  </style>
+</head>
+<body>
+
+<h1>Pokédex – Primera Generación</h1>
+<div id="pokedex"></div>
+
+<script>
+  const pokedex = document.getElementById('pokedex');
+
+  /**
+   * Función principal que inicia todo el proceso
+   */
+  async function cargarPokedex() {
+    // 1. Obtener la lista de los primeros 151 Pokémon
+    const respuesta = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
+    const datos = await respuesta.json();
+
+    // 2. Crear un array de promesas para los detalles de cada Pokémon
+    const promesas = datos.results.map(pokemon =>
+      fetch(pokemon.url).then(res => res.json())
+    );
+
+    // 3. Esperar a que todas las peticiones terminen
+    const pokemons = await Promise.all(promesas);
+
+    // 4. Renderizar cada Pokémon
+    pokemons.forEach(pokemon => crearTarjeta(pokemon));
+  }
+
+  /**
+   * Crea y añade una tarjeta de Pokémon al DOM
+   */
+  function crearTarjeta(pokemon) {
+    const card = document.createElement('div');
+    card.classList.add('card');
+
+    // Imagen del Pokémon
+    const img = document.createElement('img');
+    img.src = pokemon.sprites.front_default;
+
+    // Cambiar imagen al pasar el ratón
+    img.addEventListener('mouseover', () => {
+      img.src = pokemon.sprites.back_default;
+    });
+
+    img.addEventListener('mouseout', () => {
+      img.src = pokemon.sprites.front_default;
+    });
+
+    // Número en la Pokédex
+    const number = document.createElement('p');
+    number.classList.add('number');
+    number.textContent = `#${pokemon.id}`;
+
+    // Nombre
+    const name = document.createElement('h3');
+    name.textContent = pokemon.name;
+
+    // Tipos
+    const typesContainer = document.createElement('div');
+    typesContainer.classList.add('types');
+
+    pokemon.types.forEach(tipo => {
+      const span = document.createElement('span');
+      span.textContent = tipo.type.name;
+      span.classList.add('type', tipo.type.name);
+      typesContainer.appendChild(span);
+    });
+
+    // Añadir todo a la tarjeta
+    card.appendChild(number);
+    card.appendChild(img);
+    card.appendChild(name);
+    card.appendChild(typesContainer);
+
+    // Añadir tarjeta al contenedor principal
+    pokedex.appendChild(card);
+  }
+
+  // Iniciar la aplicación
+  cargarPokedex();
+</script>
+
+</body>
+</html>
