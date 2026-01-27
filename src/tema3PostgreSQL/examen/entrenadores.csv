@@ -1,0 +1,9 @@
+dni,nombre,apellido1,apellido2,especialidad,salarioBase,complemento
+12345678A,Carlos,García,López,Musculación,1500.00,300.00
+23456789B,María,Fernández,Martín,Cardio,1400.00,250.00
+34567890C,Juan,Rodríguez,Sánchez,Yoga,1300.00,200.00
+45678901D,Ana,Martínez,Pérez,Pilates,1350.00,220.00
+56789012E,Luis,González,Ruiz,Crossfit,1600.00,350.00
+67890123F,Elena,López,Hernández,Natación,1450.00,280.00
+78901234G,Pedro,Sánchez,Díaz,Spinning,1400.00,240.00
+89012345H,Laura,Díaz,Torres,Funcional,1380.00,260.00

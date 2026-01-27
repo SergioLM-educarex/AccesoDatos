@@ -1,4 +1,4 @@
-package tema3PostgreSQL.examen;
+package tema3PostgreSQL.examen.gimnasio;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

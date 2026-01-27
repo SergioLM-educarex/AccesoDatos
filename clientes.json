@@ -1,0 +1,58 @@
+[
+  {
+    "dni": "11111111A",
+    "nombre": "Juan",
+    "apellidos": "Pérez López",
+    "numerocliente": 1,
+    "rutinas": ["Cardio", "Pesas", "Yoga"]
+  },
+  {
+    "dni": "22222222B",
+    "nombre": "María",
+    "apellidos": "Gómez Ruiz",
+    "numerocliente": 2,
+    "rutinas": ["Yoga", "Pilates"]
+  },
+  {
+    "dni": "33333333C",
+    "nombre": "Pedro",
+    "apellidos": "Martínez Sánchez",
+    "numerocliente": 3,
+    "rutinas": ["Crossfit", "Funcional"]
+  },
+  {
+    "dni": "44444444D",
+    "nombre": "Ana",
+    "apellidos": "López García",
+    "numerocliente": 4,
+    "rutinas": ["Pilates", "Yoga", "Stretching"]
+  },
+  {
+    "dni": "55555555E",
+    "nombre": "Carlos",
+    "apellidos": "Fernández Díaz",
+    "numerocliente": 5,
+    "rutinas": ["Pesas", "Cardio"]
+  },
+  {
+    "dni": "66666666F",
+    "nombre": "Laura",
+    "apellidos": "Rodríguez Moreno",
+    "numerocliente": 6,
+    "rutinas": ["Spinning", "Cardio", "Abdominales"]
+  },
+  {
+    "dni": "77777777G",
+    "nombre": "Miguel",
+    "apellidos": "Torres Blanco",
+    "numerocliente": 7,
+    "rutinas": []
+  },
+  {
+    "dni": "88888888H",
+    "nombre": "Elena",
+    "apellidos": "Jiménez Vega",
+    "numerocliente": 8,
+    "rutinas": ["Yoga"]
+  }
+]
