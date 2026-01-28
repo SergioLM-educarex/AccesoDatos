@@ -1,0 +1,425 @@
+import java.sql.Array;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
+import java.util.Scanner;
+
+/**
+ * APUNTES (PostgreSQL + Java JDBC) - TODO JUNTO EN UN SOLO .JAVA
+ *
+ * CONTENIDO:
+ * 1) Reglas PostgreSQL: nombres en minúscula vs comillas dobles.
+ * 2) Tipos compuestos (CREATE TYPE), inserción (ROW o paréntesis), consulta (columna).campo.
+ * 3) Herencia de tablas (INHERITS) + ONLY.
+ * 4) Arrays:
+ *    - literales '{a,b}' y constructor ARRAY[...]
+ *    - telefonos[1], array_length(...,1)
+ *    - array_append, array_prepend, array_remove
+ * 5) JDBC:
+ *    - getConnection
+ *    - INSERT/UPDATE con PreparedStatement (evitar concatenación)
+ *    - Guardar/leer arrays (text[]) con createArrayOf + ResultSet.getArray
+ * 6) CallableStatement (obligatorio según tu profe):
+ *    - Funciones: "{ ? = call f_xxx(?) }" (retorno en posición 1)
+ *    - Procedimientos: "{ call p_xxx(?) }"
+ *
+ * Fuentes:
+ * - Arrays PostgreSQL (índices, literales, array_length): [web:95]
+ * - Tipos compuestos y acceso a campos: [web:56]
+ * - Herencia y ONLY: [web:68]
+ * - CallableStatement en PostgreSQL JDBC: [web:198]
+ * - Ejemplo de CallableStatement con retorno: [web:195]
+ * - CREATE PROCEDURE / CALL: [web:184]
+ * - PreparedStatement (parametrizar): [web:40]
+ * - JDBC Arrays (java.sql.Array): [web:145]
+ */
+public class ApuntesPostgreSQLJDBC {
+
+    // Ajusta estos valores a tu entorno
+    private static final String URL = "jdbc:postgresql://localhost:5432/persona";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "toor";
+
+    public static void main(String[] args) {
+        try (Connection conn = getConexion()) {
+
+            // 0) (Opcional) Crear tablas/tipos/funciones/procedimientos para probar.
+            //    En examen quizá NO te dejen hacer DDL; si no, comenta esto.
+            crearEsquemaDemo(conn);
+
+            // 1) Demo CRUD persona2 (arrays) con PreparedStatement.
+            //insertarPersona2PorConsola(conn); // descomenta si quieres meter datos a mano
+            leerPersonas2(conn);
+
+            // 2) Demos de arrays en SQL (en comentarios) y en UPDATE reales:
+            demoArrayAppendRemove(conn);
+
+            // 3) Demo de composite (consulta de campo) y herencia (ONLY) en SQL:
+            //    (Aquí lo dejamos como apuntes en comentarios; si quieres lo ejecuto también)
+
+            // 4) Demo CallableStatement (funciones y procedimientos) -> lo que te piden.
+            demoCallableFunciones(conn);
+            demoCallableProcedimientos(conn);
+
+        } catch (SQLException e) {
+            System.out.println("Error general JDBC.");
+            e.printStackTrace();
+        }
+    }
+
+    // ------------------------------------------------------------
+    // 1) Conexión
+    // ------------------------------------------------------------
+
+    /**
+     * Conexión JDBC a PostgreSQL usando DriverManager.
+     */
+    public static Connection getConexion() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASSWORD);
+    }
+
+    // ------------------------------------------------------------
+    // 2) ESQUEMA DEMO (SQL en Java, solo para practicar)
+    // ------------------------------------------------------------
+
+    /**
+     * Crea un esquema mínimo de práctica:
+     * - tabla persona2 con array text[]
+     * - tipo compuesto direccion_type y tabla personas con direccion compuesta
+     * - herencia mascota->perro
+     * - funciones y procedimientos para CallableStatement
+     *
+     * IMPORTANTE APUNTE:
+     * PostgreSQL pasa identificadores a minúscula si NO usas comillas dobles.
+     * Recomendación: usar nombres en minúscula (persona, nombre, edad) para evitar líos.
+     */
+    public static void crearEsquemaDemo(Connection conn) throws SQLException {
+        String sql =
+            // -------------------------
+            // TABLA persona2 (ARRAY)
+            // -------------------------
+            "CREATE TABLE IF NOT EXISTS persona2 (" +
+            "  dni varchar(9) PRIMARY KEY," +
+            "  nombre text," +
+            "  edad int," +
+            "  telefonos text[]" +
+            ");" +
+
+            // -------------------------
+            // TIPO COMPUESTO + TABLA personas
+            // -------------------------
+            "DO $$ BEGIN " +
+            "  IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'direccion_type') THEN " +
+            "    CREATE TYPE direccion_type AS (calle text, numero int, ciudad text, cp text);" +
+            "  END IF; " +
+            "END $$;" +
+
+            "CREATE TABLE IF NOT EXISTS personas (" +
+            "  id serial PRIMARY KEY," +
+            "  nombre text," +
+            "  apellidos text," +
+            "  edad int," +
+            "  telefonos text[]," +
+            "  direccion direccion_type" +
+            ");" +
+
+            // -------------------------
+            // HERENCIA mascota -> perro
+            // -------------------------
+            "CREATE TABLE IF NOT EXISTS mascota (" +
+            "  id_mascota serial PRIMARY KEY," +
+            "  nombre text," +
+            "  fecha_nacimiento date" +
+            ");" +
+            "CREATE TABLE IF NOT EXISTS perro (" +
+            "  id_perro serial PRIMARY KEY," +
+            "  nivel_entrenamiento varchar(50)" +
+            ") INHERITS (mascota);" +
+
+            // -------------------------
+            // FUNCIONES (CallableStatement)
+            // -------------------------
+            "CREATE OR REPLACE FUNCTION f_sin_params() " +
+            "RETURNS text LANGUAGE plpgsql AS $$ BEGIN RETURN 'ok'; END; $$;" +
+
+            "CREATE OR REPLACE FUNCTION f_un_param(n int) " +
+            "RETURNS int LANGUAGE plpgsql AS $$ BEGIN RETURN n * 2; END; $$;" +
+
+            "CREATE OR REPLACE FUNCTION f_dos_params(a int, b int) " +
+            "RETURNS int LANGUAGE plpgsql AS $$ BEGIN RETURN a + b; END; $$;" +
+
+            // -------------------------
+            // PROCEDIMIENTOS (CallableStatement)
+            // -------------------------
+            "CREATE OR REPLACE PROCEDURE p_sin_params() " +
+            "LANGUAGE plpgsql AS $$ BEGIN RAISE NOTICE 'procedimiento ok'; END; $$;" +
+
+            "CREATE OR REPLACE PROCEDURE p_un_param(IN p_nombre text) " +
+            "LANGUAGE plpgsql AS $$ BEGIN RAISE NOTICE 'Hola %', p_nombre; END; $$;" +
+
+            "CREATE OR REPLACE PROCEDURE p_dos_params(IN a int, IN b int) " +
+            "LANGUAGE plpgsql AS $$ BEGIN RAISE NOTICE 'Suma: %', (a + b); END; $$;";
+
+        try (Statement st = conn.createStatement()) {
+            st.execute(sql);
+        }
+    }
+
+    // ------------------------------------------------------------
+    // 3) CRUD (PreparedStatement) + Arrays JDBC
+    // ------------------------------------------------------------
+
+    /**
+     * Inserta en persona2 leyendo datos por consola.
+     *
+     * APUNTE:
+     * - Tabla: persona2(dni, nombre, edad, telefonos text[])
+     * - En JDBC, un array se manda con conn.createArrayOf("text", String[])
+     */
+    public static void insertarPersona2PorConsola(Connection conn) {
+        String sql = "INSERT INTO persona2 (dni, nombre, edad, telefonos) VALUES (?, ?, ?, ?)";
+
+        try (Scanner scanner = new Scanner(System.in);
+             PreparedStatement pst = conn.prepareStatement(sql)) {
+
+            System.out.print("DNI: ");
+            String dni = scanner.nextLine();
+
+            System.out.print("Nombre: ");
+            String nombre = scanner.nextLine();
+
+            System.out.print("Edad: ");
+            int edad = Integer.parseInt(scanner.nextLine());
+
+            System.out.print("Teléfono fijo: ");
+            String fijo = scanner.nextLine();
+
+            System.out.print("Teléfono móvil: ");
+            String movil = scanner.nextLine();
+
+            String[] telefonos = { fijo, movil };
+
+            pst.setString(1, dni);
+            pst.setString(2, nombre);
+            pst.setInt(3, edad);
+            pst.setArray(4, conn.createArrayOf("text", telefonos));
+
+            int filas = pst.executeUpdate();
+            System.out.println("Insertadas: " + filas);
+
+        } catch (Exception e) {
+            System.out.println("Error insertando persona2.");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Lee persona2 y muestra el array de teléfonos.
+     *
+     * APUNTE SQL:
+     * - Primer teléfono: SELECT telefonos[1] FROM persona2 WHERE nombre='Ana';
+     * - Nº teléfonos:    SELECT array_length(telefonos,1) FROM persona2;
+     */
+    public static void leerPersonas2(Connection conn) throws SQLException {
+        String sql = "SELECT dni, nombre, edad, telefonos FROM persona2";
+
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                String dni = rs.getString("dni");
+                String nombre = rs.getString("nombre");
+                int edad = rs.getInt("edad");
+
+                Array telefonosSql = rs.getArray("telefonos");
+
+                System.out.println("DNI: " + dni);
+                System.out.println("Nombre: " + nombre);
+                System.out.println("Edad: " + edad);
+                System.out.print("Teléfonos: ");
+
+                if (telefonosSql != null) {
+                    String[] telefonos = (String[]) telefonosSql.getArray();
+                    for (String t : telefonos) System.out.print(t + " ");
+                } else {
+                    System.out.print("(sin teléfonos)");
+                }
+                System.out.println("\n");
+            }
+        }
+    }
+
+    /**
+     * Demuestra:
+     * - Reemplazar todo el array: SET telefonos = '{a,b,c}'
+     * - Añadir uno: array_append(telefonos, 'x')
+     * - Quitar uno: array_remove(telefonos, 'x')
+     *
+     * APUNTE:
+     * - array_remove elimina todas las ocurrencias del valor.
+     */
+    public static void demoArrayAppendRemove(Connection conn) throws SQLException {
+        // Añadir teléfono a un dni concreto
+        String sqlAppend = "UPDATE persona2 SET telefonos = array_append(telefonos, ?) WHERE dni = ?";
+        try (PreparedStatement pst = conn.prepareStatement(sqlAppend)) {
+            pst.setString(1, "123123123");
+            pst.setString(2, "12345679B");
+            pst.executeUpdate();
+        }
+
+        // Eliminar teléfono a un dni concreto
+        String sqlRemove = "UPDATE persona2 SET telefonos = array_remove(telefonos, ?) WHERE dni = ?";
+        try (PreparedStatement pst = conn.prepareStatement(sqlRemove)) {
+            pst.setString(1, "123123123");
+            pst.setString(2, "12345679B");
+            pst.executeUpdate();
+        }
+    }
+
+    // ------------------------------------------------------------
+    // 4) Tipos compuestos (apuntes en comentarios)
+    // ------------------------------------------------------------
+
+    /*
+     * TIPOS COMPUESTOS (composite)
+     *
+     * SQL:
+     * CREATE TYPE direccion_type AS (calle text, numero int, ciudad text, cp text);
+     *
+     * CREATE TABLE personas (..., direccion direccion_type);
+     *
+     * INSERT (dos formas equivalentes):
+     * INSERT INTO personas (nombre, edad, telefonos, direccion)
+     * VALUES ('Carlos', 28, ARRAY['123','234'], ROW('Sol',742,'Springfield','12345'));
+     *
+     * INSERT INTO personas (nombre, edad, telefonos, direccion)
+     * VALUES ('Ana', 40, '{123,987}', ('Gran Vía',100,'Madrid','28001'));
+     *
+     * CONSULTA de un campo:
+     * SELECT (direccion).cp FROM personas WHERE nombre='Pedro' AND apellidos='Del Rio';
+     *
+     * Nota: para acceder al campo se usa (columna).campo. [web:56]
+     */
+
+    // ------------------------------------------------------------
+    // 5) Herencia (apuntes en comentarios)
+    // ------------------------------------------------------------
+
+    /*
+     * HERENCIA:
+     * CREATE TABLE perro (...) INHERITS (mascota);
+     *
+     * Consultar:
+     * - Solo filas físicas de mascota: SELECT * FROM ONLY mascota;
+     * - Mascota + hijas:              SELECT * FROM mascota;
+     * - Solo perro:                    SELECT * FROM perro;
+     *
+     * ONLY es la palabra clave para excluir hijas. [web:68]
+     */
+
+    // ------------------------------------------------------------
+    // 6) CallableStatement (FUNCIONES)
+    // ------------------------------------------------------------
+
+    /**
+     * Funciones con CallableStatement (lo que te piden).
+     *
+     * Formato:
+     * "{ ? = call f_xxx(?, ?, ...) }"
+     * - Param 1: retorno (OUT)
+     * - Param 2..n: parámetros IN
+     */
+    public static void demoCallableFunciones(Connection conn) throws SQLException {
+        // 0 params -> text
+        try (CallableStatement cs = conn.prepareCall("{ ? = call f_sin_params() }")) {
+            cs.registerOutParameter(1, Types.VARCHAR);
+            cs.execute();
+            System.out.println("[FUNC] f_sin_params -> " + cs.getString(1));
+        }
+
+        // 1 param -> int
+        try (CallableStatement cs = conn.prepareCall("{ ? = call f_un_param(?) }")) {
+            cs.registerOutParameter(1, Types.INTEGER);
+            cs.setInt(2, 10);
+            cs.execute();
+            System.out.println("[FUNC] f_un_param(10) -> " + cs.getInt(1));
+        }
+
+        // 2 params -> int
+        try (CallableStatement cs = conn.prepareCall("{ ? = call f_dos_params(?, ?) }")) {
+            cs.registerOutParameter(1, Types.INTEGER);
+            cs.setInt(2, 3);
+            cs.setInt(3, 7);
+            cs.execute();
+            System.out.println("[FUNC] f_dos_params(3,7) -> " + cs.getInt(1));
+        }
+    }
+
+    // ------------------------------------------------------------
+    // 7) CallableStatement (PROCEDIMIENTOS)
+    // ------------------------------------------------------------
+
+    /**
+     * Procedimientos con CallableStatement.
+     *
+     * Formato:
+     * "{ call p_xxx(?, ?, ...) }"
+     * (sin parámetro de retorno)
+     */
+    public static void demoCallableProcedimientos(Connection conn) throws SQLException {
+        try (CallableStatement cs = conn.prepareCall("{ call p_sin_params() }")) {
+            cs.execute();
+            System.out.println("[PROC] p_sin_params ejecutado");
+        }
+
+        try (CallableStatement cs = conn.prepareCall("{ call p_un_param(?) }")) {
+            cs.setString(1, "Ana");
+            cs.execute();
+            System.out.println("[PROC] p_un_param('Ana') ejecutado");
+        }
+
+        try (CallableStatement cs = conn.prepareCall("{ call p_dos_params(?, ?) }")) {
+            cs.setInt(1, 5);
+            cs.setInt(2, 9);
+            cs.execute();
+            System.out.println("[PROC] p_dos_params(5,9) ejecutado");
+        }
+    }
+
+    // ------------------------------------------------------------
+    // 8) Repaso SELECTs típicas (apuntes)
+    // ------------------------------------------------------------
+
+    /*
+     * REPASO SELECT (chuleta):
+     * SELECT * FROM persona;
+     * SELECT DISTINCT edad FROM personas;
+     * SELECT * FROM persona WHERE poblacion='Millanes' AND edad > 30;
+     * SELECT * FROM personas WHERE edad BETWEEN 20 AND 30;
+     * SELECT * FROM persona WHERE poblacion LIKE '%vera%';
+     * SELECT * FROM persona ORDER BY nombre ASC;
+     * SELECT * FROM persona ORDER BY edad ASC LIMIT 5;
+     * SELECT COUNT(*) FROM persona;
+     *
+     * Join:
+     * SELECT propietario.nombre
+     * FROM propietario INNER JOIN veterinario
+     * ON propietario.dni = veterinario.dni;
+     *
+     * Subconsulta:
+     * SELECT nombre, salario FROM empleado
+     * WHERE salario = (SELECT MAX(salario) FROM empleado);
+     *
+     * Arrays:
+     * SELECT nombre, telefonos[1] AS telefono_principal FROM persona;
+     * SELECT nombre, array_length(telefonos, 1) AS num_telefonos FROM persona;  [web:95]
+     *
+     * Compuestos:
+     * SELECT (direccion).cp FROM personas WHERE nombre='Pedro' AND apellidos='Del Rio'; [web:56]
+     */
+}

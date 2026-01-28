@@ -59,49 +59,40 @@ public class Ejercicio15Consultas {
 	}
 
 	private static void mostrar_Perros_moquillo() {
-		
+
 		String sql = "SELECT * FROM public.mascota WHERE dnipropietario = ?";
-		
+
 	}
 
 	private static void mostrar_nombreYespecie_pasandoDNI() {
 
 		String sql = "SELECT nombre, especie FROM public.mascota WHERE dnipropietario = ?";
-		
+
 		try {
-		
+
 			System.out.println("Inserte el DNI: ");
 			int dni = Integer.parseInt(entrada.nextLine());
-			
-			
-		PreparedStatement ps = conn.prepareStatement(sql);
-		
-		ps.setInt(1, dni);
-		
-		ResultSet rs = ps.executeQuery();
-		
-		while (rs.next()) {
-			
-			System.out.println("NOMBRE: "+rs.getString("nombre"));
-			System.out.println("ESPECIE: "+rs.getString("especie"));
-			
-		}
-			
-			
-			
-			
-			
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setInt(1, dni);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				System.out.println("NOMBRE: " + rs.getString("nombre"));
+				System.out.println("ESPECIE: " + rs.getString("especie"));
+
+			}
+
 		} catch (NumberFormatException e) {
 			System.out.println("Inserte un dni sin letra");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
+
 	}
 
 	private static void listar_mascotas_vacunas() {
@@ -109,7 +100,7 @@ public class Ejercicio15Consultas {
 		String sql = "SELECT * FROM public.mascota";
 
 		try {
-			PreparedStatement ps = conn.prepareCall(sql);
+			PreparedStatement ps = conn.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
@@ -123,8 +114,6 @@ public class Ejercicio15Consultas {
 
 				System.out.println("·· ·· ·· ·· ·· ·· ··");
 			}
-			
-			
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

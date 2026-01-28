@@ -12,20 +12,20 @@ import tema3PostgreSQL.ConexionMascotasDB;
 
 public class Ejercicios11_12 {
 
-	private static final int OPCION_SI = 1;
+	
 
 	public static void main(String[] args) throws SQLException {
 
 		Connection conn = ConexionMascotasDB.getConexion();
 
 		String sql = "INSERT INTO public.mascota(id, nombre, especie, raza, cartillavacunacion) "
-				+ "VALUES (?, ?, ?, ?, ARRAY [ROW(?,?,?)::cartillavacunacion]);";
+				+ "VALUES (?, ?, ?, ?, ARRAY [ROW(?,?,?)::cartillavacunacion]);";	//Se puede hacer con array_Append?
 
 		Scanner entrada = new Scanner(System.in);
 		int opcion = 0;
 
 		
-		 // 1️⃣ Obtener próximo ID libre
+		 //Obtener próximo ID libre
         PreparedStatement psId = conn.prepareStatement("SELECT COALESCE(MAX(id),0) + 1 AS next_id FROM mascota");
         ResultSet rs = psId.executeQuery();
         rs.next();
@@ -60,6 +60,7 @@ public class Ejercicios11_12 {
 		System.out.println("Indique dia");
 		String dia = entrada.nextLine();
 
+		//Formateo de fecha
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate fecha = LocalDate.parse(anyo + "-" + mes + "-" + dia, formatter);
 

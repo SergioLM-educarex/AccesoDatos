@@ -1,0 +1,20 @@
+[
+  {
+    "dni": "12345678A",
+    "nombre": "Pedro Martínez",
+    "telefono": "611223344",
+    "email": "pedro@email.com",
+    "direccion": "Calle Mayor 1",
+    "num_socio": 1001,
+    "cuota_anual": 45.00
+  },
+  {
+    "dni": "87654321B",
+    "nombre": "Laura Sánchez",
+    "telefono": "622334455",
+    "email": "laura@email.com",
+    "direccion": "Avenida Sol 15",
+    "num_socio": 1002,
+    "cuota_anual": 45.00
+  }
+]

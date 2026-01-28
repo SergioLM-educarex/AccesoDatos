@@ -8,41 +8,36 @@ import java.sql.Statement;
 
 import tema3PostgreSQL.ConexionMascotasDB;
 
-
-
 public class Ejercicio4_Select {
 
 	public static void main(String[] args) {
-		
+
 		Connection conn = ConexionMascotasDB.getConexion();
-		
-		
+
 		String sql = "SELECT * FROM mascota";
 
 		try {
-		    Statement st = conn.createStatement();
-		    System.out.println("----");
-		    ResultSet rs = st.executeQuery(sql);
+			Statement st = conn.createStatement();
+			System.out.println("----");
+			ResultSet rs = st.executeQuery(sql);
 
-		    while (rs.next()) {
-		        // Ejemplo de columnas
-		        System.out.println(
-		            rs.getInt("id") + " - " +
-		            rs.getString("nombre")+" - "+
-		            rs.getString("especie")+" - "+
-		            rs.getString("raza")
-		        );
-		    }
-		    
-		    System.out.println("Listo");
+			while (rs.next()) {
+				// Ejemplo de columnas
+				System.out.println(rs.getInt("id") + " - " + rs.getString("nombre") + " - " + rs.getString("especie")
+						+ " - " + rs.getString("raza")
 
-		    rs.close();
-		    st.close();
+				);
+
+			}
+
+			System.out.println("Listo");
+
+			rs.close();
+			st.close();
 
 		} catch (SQLException e) {
-		    e.printStackTrace();
+			e.printStackTrace();
 		}
-
 
 	}
 

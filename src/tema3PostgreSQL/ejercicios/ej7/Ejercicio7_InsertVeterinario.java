@@ -19,6 +19,8 @@ public class Ejercicio7_InsertVeterinario {
 
 		int numColegiado, dni;
 		String nombre, apellido1 = null,apellido2 = null;
+
+		//INSERTAR ARRAY POSTGRE
 		String[] apellidos = new String[2];
 	
 
@@ -46,7 +48,7 @@ public class Ejercicio7_InsertVeterinario {
 			// Asignar parámetros --Cambiar
 			st.setInt(1, dni);
 			st.setString(2, nombre);
-			st.setArray(3, conn.createArrayOf("text", apellidos));
+			st.setArray(3, conn.createArrayOf("text", apellidos)); //ESTO ES LO IMPORTANTE
 			st.setInt(4, numColegiado);
 
 			// Ejecutar INSERT
