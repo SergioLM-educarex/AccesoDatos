@@ -118,11 +118,21 @@ public class Principal {
 
 	/* ================= SUBIR SALARIO DE ENTRENADORES ======================== */
 	private static void subir_Salarios_Entrenadores() throws SQLException {
-	    String sql = "CALL subir_salarios_entrenadores()";
+	    String sql = "{CALL subir_salarios_entrenadores()}";
 	    
-	    try (PreparedStatement ps = con.prepareStatement(sql)) {
-	        ps.execute();
-	        System.out.println("Salarios de todos los entrenadores actualizados (+2%)");
+	   CallableStatement cs = con.prepareCall(sql);
+	    
+	    
+	    try  {
+	        int resultado = cs.executeUpdate();
+	        
+	        if (resultado >=0) {
+				System.out.println("Salario actualizado");
+			}else {
+				System.out.println("No actualizado");
+			}
+	        
+	      
 	    } catch (SQLException e) {
 	        System.out.println("Error al actualizar salarios: " + e.getMessage());
 	        e.printStackTrace();
