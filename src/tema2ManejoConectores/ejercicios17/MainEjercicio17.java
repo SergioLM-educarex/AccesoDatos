@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+;
 
-import com.mysql.cj.jdbc.ServerPreparedStatement;
 
 public class MainEjercicio17 {
 
