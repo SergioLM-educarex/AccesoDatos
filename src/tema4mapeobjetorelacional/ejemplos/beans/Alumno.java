@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity(name="persona")
 @Table(name="persona")
-public class Persona implements Serializable {
+public class Alumno implements Serializable {
 
 	@Id()
 	@Column(name = "dni")
@@ -24,7 +24,7 @@ public class Persona implements Serializable {
 	@Column(name = "telefono")
 	private int telefono;
 
-	public Persona(String dni, int edad, String nombre, int telefono) {
+	public Alumno(String dni, int edad, String nombre, int telefono) {
 		super();
 		this.dni = dni;
 		this.edad = edad;
@@ -34,7 +34,7 @@ public class Persona implements Serializable {
 
 	
 
-	public Persona() {
+	public Alumno() {
 		super();
 	}
 

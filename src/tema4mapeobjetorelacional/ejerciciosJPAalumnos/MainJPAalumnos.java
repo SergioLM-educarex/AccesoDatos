@@ -1,17 +1,20 @@
-package tema4mapeobjetorelacional.ejemplos.beans;
+package tema4mapeobjetorelacional.ejerciciosJPAalumnos;
 
 import java.util.Scanner;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class MainEjemplo {
+import tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.AlumnoJPA;
+import tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ProfesorJPA;
 
-    public static void main(String[] args) {
-
-        // Crear la factoria de EntityManager
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("UPPersonas");
+public class MainJPAalumnos {
+	
+	public static void main(String[] args) {
+		 // Crear la factoria de EntityManager
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("UPAlumnos");
         System.out.println("Factoria creada");
 
         EntityManager em = factory.createEntityManager();
@@ -25,14 +28,17 @@ public class MainEjemplo {
             tx.begin(); // <<--- MUY IMPORTANTE
 
             // Crear un objeto Persona
-            Alumno p = new Alumno("123", 32, "Sergio", 666222555);
+            AlumnoJPA alumno = new AlumnoJPA(1, "Sergio", "1DAM", 635);
+            ProfesorJPA pro = new ProfesorJPA(1, "Ramon");
 
+           em.persist(pro); 
+           
             // Persistir la persona
-            em.persist(p);
+            em.persist(pro);
 
             // Confirmar los cambios en la base de datos
             tx.commit();
-            System.out.println("Persona guardada con éxito");
+            System.out.println("Profesor guardado con éxito");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -48,5 +54,6 @@ public class MainEjemplo {
             factory.close();
             entrada.close();
         }
-    }
+	}
+
 }
