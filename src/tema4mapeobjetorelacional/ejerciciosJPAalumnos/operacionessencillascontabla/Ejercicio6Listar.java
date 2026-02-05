@@ -26,7 +26,7 @@ public class Ejercicio6Listar {
 		
 		//======================
 		//Ejercicio 6 Muestra el contenido de la tabla Profesor
-		//====
+		//======================
 		
 		try {
 			
