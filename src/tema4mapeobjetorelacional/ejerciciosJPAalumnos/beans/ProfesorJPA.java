@@ -11,51 +11,29 @@ import javax.persistence.Id;
 @Entity(name = "profesor")
 public class ProfesorJPA implements Serializable {
 
-	@Id
-	@Column(name = "id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Column(name = "nombre")
-	private String nombre;
+    @Column(name = "nombre")
+    private String nombre;
 
-	public ProfesorJPA() {		
-	}
-	
-	
-	
-	public ProfesorJPA(String nombre) {
-		super();
-		this.nombre = nombre;
-	}
+    public ProfesorJPA() {
+    }
 
+    public ProfesorJPA(String nombre) {
+        this.nombre = nombre;
+    }
 
+    public int getId() {
+        return id;
+    }
 
-	public ProfesorJPA(int id, String nombre) {
-		super();
-		this.id = id;
-		this.nombre = nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
-	@Override
-	public String toString() {
-		return "ProfesorJPA [id=" + id + ", nombre=" + nombre + "]";
-	}
-
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 }

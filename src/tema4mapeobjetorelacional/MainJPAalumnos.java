@@ -1,4 +1,6 @@
-package tema4mapeobjetorelacional.ejerciciosJPAalumnos;
+package tema4mapeobjetorelacional;
+
+
 
 import java.util.Scanner;
 
