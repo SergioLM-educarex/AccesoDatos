@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-
 @Entity(name = "alumno")
 public class AlumnoJPA implements Serializable {
 
+<<<<<<< HEAD
 	@Id()
 	@Column(name = "dni")
 	private int id;
@@ -35,6 +35,30 @@ public class AlumnoJPA implements Serializable {
 		this.curso = curso;
 		this.telefono = telefono;
 	}
+=======
+    @Id
+    @Column(name = "dni")
+    private int id;
+
+    @Column(name = "nombre")
+    private String nombre;
+
+    @Column(name = "curso")
+    private String curso;
+
+    @Column(name = "telefono")
+    private int telefono;
+
+    public AlumnoJPA() {
+    }
+
+    public AlumnoJPA(int id, String nombre, String curso, int telefono) {
+        this.id = id;
+        this.nombre = nombre;
+        this.curso = curso;
+        this.telefono = telefono;
+    }
+>>>>>>> branch 'master' of https://github.com/SergioLM-educarex/AccesoDatos.git
 
 	public int getId() {
 		return id;
@@ -68,4 +92,10 @@ public class AlumnoJPA implements Serializable {
 		this.telefono = telefono;
 	}
 
+	@Override
+	public String toString() {
+		return "AlumnoJPA [id=" + id + ", nombre=" + nombre + ", curso=" + curso + ", telefono=" + telefono + "]";
+	}
+
+   
 }
