@@ -1,21 +1,10 @@
 package tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans;
 
-import java.io.Serializable;
+import javax.persistence.*;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import tema1.ficheros6formatoIntercambio.jaxb.ejercicios.ejercicio44.beans.Direccion;
-
 @Entity(name = "alumno")
-public class AlumnoJPA implements Serializable {
+public class AlumnoJPA {
 
     @Id
     @Column(name = "dni")
@@ -29,13 +18,12 @@ public class AlumnoJPA implements Serializable {
 
     @Column(name = "telefono")
     private int telefono;
-    
-    // Relación uno a muchos con la entidad NotaJPA
+
     @OneToMany(mappedBy = "notaId.alumno", cascade = CascadeType.ALL)
     private List<NotaJPA> notas;
 
     @ManyToOne
-    @JoinColumn(name = "direccion_id") // Relación con la tabla direccion
+    @JoinColumn(name = "direccion_id", referencedColumnName = "id")
     private DireccionJPA direccion;
 
     public AlumnoJPA() {
@@ -47,42 +35,53 @@ public class AlumnoJPA implements Serializable {
         this.curso = curso;
         this.telefono = telefono;
     }
-	public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    // Getters y setters
+    public int getId() {
+        return id;
+    }
 
-	public String getNombre() {
-		return nombre;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public String getCurso() {
-		return curso;
-	}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public void setCurso(String curso) {
-		this.curso = curso;
-	}
+    public String getCurso() {
+        return curso;
+    }
 
-	public int getTelefono() {
-		return telefono;
-	}
+    public void setCurso(String curso) {
+        this.curso = curso;
+    }
 
-	public void setTelefono(int telefono) {
-		this.telefono = telefono;
-	}
+    public int getTelefono() {
+        return telefono;
+    }
 
-	@Override
-	public String toString() {
-		return "AlumnoJPA [id=" + id + ", nombre=" + nombre + ", curso=" + curso + ", telefono=" + telefono + "]";
-	}
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
 
-   
+    public List<NotaJPA> getNotas() {
+        return notas;
+    }
+
+    public void setNotas(List<NotaJPA> notas) {
+        this.notas = notas;
+    }
+
+    public DireccionJPA getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(DireccionJPA direccion) {
+        this.direccion = direccion;
+    }
 }

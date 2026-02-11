@@ -10,19 +10,22 @@ import javax.persistence.ManyToOne;
 public class NotaId implements Serializable {
 
 	@ManyToOne
-	@JoinColumn(name = "alumno_id", referencedColumnName = "id", nullable = false)
-	private AlumnoJPA alumno; // Relación con el alumno
+	@JoinColumn(name = "alumno", referencedColumnName = "dni")
+	private AlumnoJPA alumno;
 
 	@ManyToOne
-	@JoinColumn(name = "modulo_codigo", referencedColumnName = "codigo", nullable = false)
-	private ModuloJPA modulo; // Relación con el módulo
+	@JoinColumn(name = "modulo", referencedColumnName = "codigo")
+	private ModuloJPA modulo;
+
+	public NotaId() {
+	}
 
 	public NotaId(AlumnoJPA alumno, ModuloJPA modulo) {
-		super();
 		this.alumno = alumno;
 		this.modulo = modulo;
 	}
 
+	// Getters y setters
 	public AlumnoJPA getAlumno() {
 		return alumno;
 	}
@@ -38,10 +41,4 @@ public class NotaId implements Serializable {
 	public void setModulo(ModuloJPA modulo) {
 		this.modulo = modulo;
 	}
-
-	@Override
-	public String toString() {
-		return "NotaId [alumno=" + alumno + ", modulo=" + modulo + "]";
-	}
-
 }

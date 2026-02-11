@@ -1,39 +1,50 @@
 package tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans;
 
-import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "profesor")
-public class ProfesorJPA implements Serializable {
+public class ProfesorJPA {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	private int id;
 
-    @Column(name = "nombre")
-    private String nombre;
+	@Column(name = "nombre")
+	private String nombre;
 
-    public ProfesorJPA() {
-    }
+	@OneToMany(mappedBy = "imparteId.profesor", cascade = CascadeType.ALL)
+	private List<ImparteJPA> impartidos;
 
-    public ProfesorJPA(String nombre) {
-        this.nombre = nombre;
-    }
+	public ProfesorJPA() {
+	}
 
-    public int getId() {
-        return id;
-    }
+	public ProfesorJPA(String nombre) {
+		this.nombre = nombre;
+	}
 
-    public String getNombre() {
-        return nombre;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public List<ImparteJPA> getImpartidos() {
+		return impartidos;
+	}
+
+	public void setImpartidos(List<ImparteJPA> impartidos) {
+		this.impartidos = impartidos;
+	}
 }

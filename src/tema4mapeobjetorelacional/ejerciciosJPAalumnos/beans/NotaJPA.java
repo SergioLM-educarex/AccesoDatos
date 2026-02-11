@@ -1,7 +1,6 @@
 package tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 @Entity(name = "nota")
 public class NotaJPA {
@@ -9,18 +8,18 @@ public class NotaJPA {
 	@EmbeddedId
 	private NotaId notaId;
 
+	@Column(name = "nota")
 	private double nota;
 
 	public NotaJPA() {
-		super();
 	}
 
 	public NotaJPA(NotaId notaId, double nota) {
-		super();
 		this.notaId = notaId;
 		this.nota = nota;
 	}
 
+	// Getters y setters
 	public NotaId getNotaId() {
 		return notaId;
 	}
@@ -36,5 +35,4 @@ public class NotaJPA {
 	public void setNota(double nota) {
 		this.nota = nota;
 	}
-
 }

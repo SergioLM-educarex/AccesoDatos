@@ -1,30 +1,32 @@
 package tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
+import javax.persistence.*;
 
-@Entity(name = "modulo_profesor")
+@Entity(name = "imparte")
 public class ImparteJPA {
 
 	@EmbeddedId
-	private ImparteJPA imparte;
+	private ImparteID imparteId;
+
+	// Si necesitas más información sobre la relación, puedes agregar más atributos
+	// aquí,
+	// por ejemplo, si un profesor tiene más detalles sobre cómo imparte el módulo.
 
 	public ImparteJPA() {
-		super();
 	}
 
-	public ImparteJPA getImparte() {
-		return imparte;
+	public ImparteJPA(ImparteID imparteId) {
+		this.imparteId = imparteId;
 	}
 
-	public void setImparte(ImparteJPA imparte) {
-		this.imparte = imparte;
+	public ImparteID getImparteId() {
+		return imparteId;
 	}
 
-	@Override
-	public String toString() {
-		return "ImparteJPA [imparte=" + imparte + "]";
+	public void setImparteId(ImparteID imparteId) {
+		this.imparteId = imparteId;
 	}
-	
-	
+
+	// Otros métodos que quieras agregar
+
 }
