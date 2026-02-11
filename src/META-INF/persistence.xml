@@ -1,66 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
     http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-    version="2.0">
+	version="2.0">
 
-    <!-- Unidad de persistencia para UPAlumnos -->
-    <persistence-unit name="UPAlumnos" transaction-type="RESOURCE_LOCAL">
-        <!-- Provider Hibernate -->
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+	<!-- Unidad de persistencia para UPAlumnos -->
+	<persistence-unit name="UPAlumnos"
+		transaction-type="RESOURCE_LOCAL">
+		<!-- Provider Hibernate -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!-- Registrar las clases de las entidades -->
-        <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.AlumnoJPA</class>
-        <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.NotaJPA</class>
-        <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ProfesorJPA</class>
-        <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ModuloJPA</class>
-        <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ImparteJPA</class>
-        <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ImparteId</class>
-        <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.NotaId</class>
+		<!-- Registrar las clases de las entidades -->
+		<class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.AlumnoJPA</class>
+		<class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.NotaJPA</class>
+		<class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ProfesorJPA</class>
+		<class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ModuloJPA</class>
+		<class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ImparteJPA</class>
+		<class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ImparteId</class>
+		<class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.NotaId</class>
 
-        <!-- Excluir clases no listadas explícitamente -->
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<!-- Excluir clases no listadas explícitamente -->
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
-        <properties>
-            <!-- Configuración de conexión para la base de datos -->
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/alumnosbd" />
-            <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="" />
+		<properties>
+			<!-- Configuración de conexión para la base de datos -->
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.cj.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/alumnosbd" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
 
-            <!-- Configuración de Hibernate -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
-            <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="update" /> <!-- Actualiza el esquema automáticamente -->
-            
-            <!-- Ajustes adicionales para formatear las consultas SQL -->
-            <property name="hibernate.format_sql" value="true" />
-        </properties>
-    </persistence-unit>
+			<!-- Configuración de Hibernate -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL8Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" /> <!-- Actualiza el esquema automáticamente -->
 
-    <!-- Unidad de persistencia para UPProductos (si es necesario) -->
-    <persistence-unit name="UPProductos" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+			<!-- Ajustes adicionales para formatear las consultas SQL -->
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
 
-        <!-- Registrar las clases de productos -->
-        <class>tema4mapeobjetorelacional.ejercicioCRUD.Producto</class>
+	<!-- /////////////////////////////////////////////////////////// -->
+	<!-- Unidad de persistencia para UPProductos (si es necesario) -->
+	<!-- /////////////////////////////////////////////////////////// -->
+	<persistence-unit name="UPProductos"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <!-- Excluir clases no listadas explícitamente -->
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<!-- Registrar las clases de productos -->
+		<class>tema4mapeobjetorelacional.ejercicioCRUD.Producto</class>
 
-        <properties>
-            <!-- Configuración de conexión para la base de datos de productos -->
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdproductos" />
-            <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="" />
+		<!-- Excluir clases no listadas explícitamente -->
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 
-            <!-- Configuración de Hibernate -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
-            <property name="hibernate.show_sql" value="true" />
-            <property name="hibernate.hbm2ddl.auto" value="update" />
-        </properties>
-    </persistence-unit>
+		<properties>
+			<!-- Configuración de conexión para la base de datos de productos -->
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.cj.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/productosbd" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+
+			<!-- Configuración de Hibernate -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL8Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
+
+	<!-- Unidad de persistencia para UPFacturas (si es necesario) -->
+	<persistence-unit name="UPProductosG"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<!-- Registrar las clases de productos -->
+		<class>tema4mapeobjetorelacional.onetomany.Categoria</class>
+		<class>tema4mapeobjetorelacional.onetomany.ProductoJPA</class>
+
+		<!-- Excluir clases no listadas explícitamente -->
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<properties>
+			<!-- Configuración de conexión para la base de datos de productos -->
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.cj.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/categoriasbd" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+
+			<!-- Configuración de Hibernate -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL8Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		</properties>
+	</persistence-unit>
 
 </persistence>
