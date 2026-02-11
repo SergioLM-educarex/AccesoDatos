@@ -32,7 +32,9 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
     <persistence-unit name="UPAlumnos" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.AlumnoJPA</class>
+        <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.NotaJPA</class>
          <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ProfesorJPA</class>
+         <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ModuloJPA</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
