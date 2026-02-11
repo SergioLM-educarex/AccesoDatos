@@ -1,101 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-<<<<<<< Upstream, based on branch 'master' of git@github.com:SergioLM-educarex/AccesoDatos.git
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
-http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
+        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
     version="2.0">
 
+    <!-- Unidad de persistencia para UPPersonas -->
     <persistence-unit name="UPPersonas" transaction-type="RESOURCE_LOCAL">
-        <!-- Provider -->
+        <!-- Persistence provider -->
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
-        <!-- Hibernate autodetecta todas las entidades -->
+        
+        <!-- Representamos las clases opcionales (puedes agregar más clases si es necesario) -->
         <class>tema4mapeobjetorelacional.ejemplos.beans.Persona</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
-            <!-- Conexión a MySQL -->
+            <!-- Configuración de conexión -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/alumnosbd" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="" />
-
-            <!-- Configuración Hibernate -->
+            
+            <!-- Configuración de Hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
         </properties>
     </persistence-unit>
-    
-    
-     <!-- Unidad de persistencia para bdalumno -->
-=======
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence 
-	http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-	version="2.0">
-	<persistence-unit name="UPPersonas"
-		transaction-type="RESOURCE_LOCAL">
-		<!-- Persistence provider -->
-		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<!-- Representamos las clases / Opcional, si no se ponen se mapean todas -->
-		<class>Persona</class>
-		<!-- Solamente se mapean las clases representadas con class -->
-		<exclude-unlisted-classes>true</exclude-unlisted-classes>
-		<properties>
-			<!-- Configuración de conexión -->
-			<property name="javax.persistence.jdbc.driver"
-				value="com.mysql.cj.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/personas" />
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="" />
-			<!-- Configuración de Hibernate -->
-			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.MySQL8Dialect" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-		</properties>
-	</persistence-unit>
-	
-	<!-- Unidad de persistencia para bdalumno -->
->>>>>>> a1ac7aa ejercicio CRUD con JPA
+
+    <!-- Unidad de persistencia para UPAlumnos -->
     <persistence-unit name="UPAlumnos" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <!-- Registrar las clases que pertenecen a UPAlumnos -->
         <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.AlumnoJPA</class>
         <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.NotaJPA</class>
-         <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ProfesorJPA</class>
-         <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ModuloJPA</class>
+        <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ProfesorJPA</class>
+        <class>tema4mapeobjetorelacional.ejerciciosJPAalumnos.beans.ModuloJPA</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
         <properties>
+            <!-- Configuración de conexión -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/alumnosbd" />
             <property name="javax.persistence.jdbc.user" value="root" />
             <property name="javax.persistence.jdbc.password" value="" />
+            
+            <!-- Configuración de Hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
         </properties>
     </persistence-unit>
-    
-    <!-- Unidad de persistencia para bdalumno -->
+
+    <!-- Unidad de persistencia para UPProductos -->
     <persistence-unit name="UPProductos" transaction-type="RESOURCE_LOCAL">
-    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <!-- Registrar las clases de productos -->
+        <class>tema4mapeobjetorelacional.ejercicioCRUD.Producto</class>
 
-    <!-- Registrar explícitamente todas las entidades -->
-    <class>tema4mapeobjetorelacional.ejercicioCRUD.Producto</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
-    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <!-- Configuración de conexión -->
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdproductos" />
+            <property name="javax.persistence.jdbc.user" value="root" />
+            <property name="javax.persistence.jdbc.password" value="" />
+            
+            <!-- Configuración de Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
+            <property name="hibernate.show_sql" value="true" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
+        </properties>
+    </persistence-unit>
 
-    <properties>
-        <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/bdproductos" />
-        <property name="javax.persistence.jdbc.user" value="root" />
-        <property name="javax.persistence.jdbc.password" value="" />
-        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
-        <property name="hibernate.hbm2ddl.auto" value="update" />
-        <property name="hibernate.show_sql" value="true" />
-    </properties>
-</persistence-unit>
 </persistence>
