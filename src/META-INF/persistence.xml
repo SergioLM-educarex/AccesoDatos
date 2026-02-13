@@ -43,6 +43,10 @@
 		</properties>
 	</persistence-unit>
 
+
+
+
+
 	<!-- /////////////////////////////////////////////////////////// -->
 	<!-- Unidad de persistencia para UPProductos (si es necesario) -->
 	<!-- /////////////////////////////////////////////////////////// -->
@@ -90,7 +94,7 @@
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/categoriasbd" />
+				value="jdbc:mysql://localhost:3306/usuariosbd" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="" />
 
@@ -101,5 +105,103 @@
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
 	</persistence-unit>
+	
+	<!-- Unidad de persistencia para el ejercicio One-to-One -->
+    <persistence-unit name="UPPerfilUsuario" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <!-- Registrar las clases de entidad -->
+        <class>tema4mapeobjetorelacional.onetoone.Usuario</class>
+        <class>tema4mapeobjetorelacional.onetoone.Perfil</class>
+        
+        <!-- Excluir clases no listadas explícitamente -->
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        
+        <properties>
+            <!-- Configuración de conexión para la base de datos -->
+            <property name="javax.persistence.jdbc.driver" 
+                      value="com.mysql.cj.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" 
+                      value="jdbc:mysql://localhost:3306/perfilusuariobd" />
+            <property name="javax.persistence.jdbc.user" 
+                      value="root" />
+            <property name="javax.persistence.jdbc.password" 
+                      value="" />
+            
+            <!-- Configuración de Hibernate -->
+            <property name="hibernate.dialect" 
+                      value="org.hibernate.dialect.MySQL8Dialect" />
+            <property name="hibernate.show_sql" 
+                      value="true" />
+            <property name="hibernate.hbm2ddl.auto" 
+                      value="update" />
+        </properties>
+    </persistence-unit>
+    
+      <!-- Unidad de persistencia para el sistema de facturación -->
+    <persistence-unit name="UPFacturacion" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
+        <!-- Registrar las clases de entidad -->
+        <class>tema4mapeobjetorelacional.facturacion.modelo.Cliente</class>
+        <class>tema4mapeobjetorelacional.facturacion.modelo.Factura</class>
+        
+        <!-- Excluir clases no listadas explícitamente -->
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        
+        <properties>
+            <!-- Configuración de conexión para la base de datos -->
+            <property name="javax.persistence.jdbc.driver" 
+                      value="com.mysql.cj.jdbc.Driver" />
+            <property name="javax.persistence.jdbc.url" 
+                      value="jdbc:mysql://localhost:3306/facturacionbd" />
+            <property name="javax.persistence.jdbc.user" 
+                      value="root" />
+            <property name="javax.persistence.jdbc.password" 
+                      value="" />
+            
+            <!-- Configuración de Hibernate -->
+            <property name="hibernate.dialect" 
+                      value="org.hibernate.dialect.MySQL8Dialect" />
+            <property name="hibernate.show_sql" 
+                      value="true" />
+            <property name="hibernate.hbm2ddl.auto" 
+                      value="update" />
+        </properties>
+    </persistence-unit>
+    
+    <!-- Unidad de persistencia para UPClima -->
+	<persistence-unit name="UPClima"
+		transaction-type="RESOURCE_LOCAL">
+		<!-- Provider Hibernate -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<!-- Registrar las clases de las entidades -->
+		<class>tema4mapeobjetorelacional.aemet2013.model.DatoClima</class>
+		
+
+		<!-- Excluir clases no listadas explícitamente -->
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<properties>
+			<!-- Configuración de conexión para la base de datos -->
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.cj.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/climabd" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+
+			<!-- Configuración de Hibernate -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL8Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" /> <!-- Actualiza el esquema automáticamente -->
+
+			<!-- Ajustes adicionales para formatear las consultas SQL -->
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+
 
 </persistence>
