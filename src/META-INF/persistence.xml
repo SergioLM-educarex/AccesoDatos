@@ -235,6 +235,44 @@
 			<property name="hibernate.format_sql" value="true" />
 		</properties>
 	</persistence-unit>
+	
+	 <!-- Unidad de persistencia para UPLibreria-->
+	<persistence-unit name="UPLibreria"
+		transaction-type="RESOURCE_LOCAL">
+		<!-- Provider Hibernate -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+		<!-- Registrar las clases de las entidades -->
+		<class>tema4mapeobjetorelacional.zejerciciofinal.Libro</class>
+		<class>tema4mapeobjetorelacional.zejerciciofinal.Socio</class>
+		<class>tema4mapeobjetorelacional.zejerciciofinal.Prestamo</class>
+		
+
+		<!-- Excluir clases no listadas explícitamente -->
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+		<properties>
+			<!-- Configuración de conexión para la base de datos -->
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.cj.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/bdprestamos_sergioleon	" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+
+			<!-- Configuración de Hibernate -->
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL8Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" /> <!-- Actualiza el esquema automáticamente -->
+
+			<!-- Ajustes adicionales para formatear las consultas SQL -->
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+
+	
+	
 
 
 </persistence>
