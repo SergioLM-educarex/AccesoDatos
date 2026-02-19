@@ -5,10 +5,18 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedNativeQuery;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Entity(name="persona")
-@Table(name="persona")
+@Entity(name="alumno")
+@Table(name="alumno")
+//Consulta JPQL predefinida
+@NamedQuery(name = "verAlumnos", query = "SELECT a FROM alumno a where a.edad > :edad")
+
+//Consulta SQL predefinida
+@NamedNativeQuery(name = "alumno.veralumnos", query = "SELECT * FROM alumno", resultClass = Alumno.class)
+
 public class Alumno implements Serializable {
 
 	@Id()

@@ -25,14 +25,14 @@ public class MainEjemplo {
             tx.begin(); // <<--- MUY IMPORTANTE
 
             // Crear un objeto Persona
-            Alumno p = new Alumno("123", 32, "Sergio", 666222555);
+            Alumno p = new Alumno("4", 33, "Sergio", 999666333);
 
             // Persistir la persona
             em.persist(p);
 
             // Confirmar los cambios en la base de datos
             tx.commit();
-            System.out.println("Persona guardada con éxito");
+            System.out.println("Alumno guardada con éxito");
 
         } catch (Exception e) {
             e.printStackTrace();
