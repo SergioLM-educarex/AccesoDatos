@@ -12,7 +12,7 @@ import com.mongodb.client.MongoDatabase;
 // Importamos filtros estáticos para consultas (como eq)
 import static com.mongodb.client.model.Filters.eq;
 
-public class QuickStartClase {
+public class EjemploPeliculas {
     public static void main(String[] args) {
         // Cadena de conexión a MongoDB Atlas con usuario y contraseña
         // Recuerda reemplazar <user> y <db_password> con tus credenciales
